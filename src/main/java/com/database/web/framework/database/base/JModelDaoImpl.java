@@ -43,8 +43,14 @@ public class JModelDaoImpl implements JModelDao {
     @Override
     public BaseModel insertModel(BaseModel baseModel) throws Exception {
         TableProperties tableProperties = TableProperties.loadColumnsAndKeys(jdbcTemplate,baseModel);
-
         baseModel = tableProperties.toInsertModelInstance(jdbcTemplate,baseModel);
+        return baseModel;
+    }
+
+    @Override
+    public BaseModel deleteModel(BaseModel baseModel) throws Exception {
+        TableProperties tableProperties = TableProperties.loadColumnsAndKeys(jdbcTemplate,baseModel);
+        baseModel = tableProperties.toDeleteModelInstance(jdbcTemplate,baseModel);
         return baseModel;
     }
 }

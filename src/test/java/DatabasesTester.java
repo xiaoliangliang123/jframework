@@ -62,10 +62,20 @@ public class DatabasesTester {
     public void testInsertObject() throws Exception {
 
         UserModel userModel = new UserModel();
-        userModel.setId("3");
+        userModel.setId("4");
         userModel.setUsername("wl22");
         userModel.setPassword("wl22");
         userModel =  (UserModel)userDao.getjBaseDao().insertModel(userModel);
+        System.out.println(userModel.getId());
+
+    }
+
+    @Test
+    public void testDeleteObject() throws Exception {
+
+        UserModel userModel = new UserModel();
+        userModel.setId("4");
+        userModel =  (UserModel)userDao.getjBaseDao().deleteModel(userModel);
         System.out.println(userModel.getId());
 
     }

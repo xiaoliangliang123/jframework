@@ -361,4 +361,9 @@ public class JBaseDao implements JdbcOperations,JModelDao{
     public BaseModel insertModel(BaseModel baseModel) throws Exception {
         return jModelDao.insertModel(baseModel);
     }
+
+    @Override
+    public BaseModel deleteModel(BaseModel baseModel) throws Exception {
+        return jModelDao.deleteModel(baseModel);
+    }
 }

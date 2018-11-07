@@ -161,8 +161,9 @@ public class TableProperties {
     public BaseModel toInsertModelInstance(JdbcTemplate jdbcTemplate, BaseModel baseModel) throws IllegalAccessException, NoSuchMethodException, InstantiationException, ClassNotFoundException, NoSuchFieldException {
 
         String sql = retrunInsertSql();
-        colValues.removeAll(Collections.singleton(null));
         colValues.addAll(pkValues);
+        colValues.removeAll(Collections.singleton(null));
+
         int updateRows = jdbcTemplate.update(sql,colValues.toArray());
 
         if (updateRows == 0) {
@@ -171,25 +172,51 @@ public class TableProperties {
         return baseModel;
     }
 
+    public BaseModel toDeleteModelInstance(JdbcTemplate jdbcTemplate, BaseModel baseModel) throws IllegalAccessException, NoSuchMethodException, InstantiationException, ClassNotFoundException, NoSuchFieldException {
+
+        String sql = retrunDeleteSql();
+        int updateRows = jdbcTemplate.update(sql,pkValues.toArray());
+        if (updateRows == 0) {
+            return null;
+        }
+        return baseModel;
+    }
+
+    private String retrunDeleteSql() {
+        StringBuilder stringBuilder = new StringBuilder("delete from " + this.tableName);
+        stringBuilder.append(" where ");
+        for (int i = 0; i < pkeys.size(); i++) {
+            if (i == 0) {
+                stringBuilder.append(" " + pkeys.get(i) + " = ?");
+            } else {
+                stringBuilder.append(" and " + pkeys.get(i) + " = ?");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     private String retrunInsertSql() {
         boolean isSet = false;
-        StringBuilder stringBuilder = new StringBuilder(" insert into  " + this.tableName);
+        StringBuilder stringBuilder = new StringBuilder(" insert into  " + this.tableName +" ( ");
+        isSet = false;
+        columns.addAll(pkeys);
+        columns.removeAll(Collections.singleton(null));
         for (int i = 0; i < columns.size(); i++) {
-            if(!StringUtil.isEmpty(colValues.get(i))&&!pkeys.contains(columns.get(i))) {
-                if(!isSet) {
-                    stringBuilder.append(" ( " + columns.get(i) + " , ");
+                if(i !=columns.size()-1) {
+                    stringBuilder.append(" " + columns.get(i) + " , ");
                     isSet = true;
                 }else {
                     stringBuilder.append("  " + columns.get(i) + "  ");
                 }
-            }
+
         }
+
         stringBuilder.append(" )  values ( ");
-        for (int i = 0; i < colValues.size(); i++) {
-            if(i !=colValues.size()) {
-                stringBuilder.append("  " + colValues.get(i) + " , ");
+        for (int i = 0; i < columns.size(); i++) {
+            if(i !=columns.size()-1) {
+                stringBuilder.append(" ? , ");
             }else {
-                stringBuilder.append("  " + colValues.get(i) + "  ");
+                stringBuilder.append("  ?  ");
             }
         }
         stringBuilder.append(" ) ");

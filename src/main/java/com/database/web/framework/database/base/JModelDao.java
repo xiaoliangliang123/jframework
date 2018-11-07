@@ -10,5 +10,7 @@ public interface JModelDao {
 
     public  BaseModel insertModel(BaseModel baseModel) throws Exception;
 
+    public  BaseModel deleteModel(BaseModel baseModel) throws Exception;
+
 
 }
