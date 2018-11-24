@@ -1,6 +1,7 @@
 import com.framework.v1.Application;
 import com.framework.v1.business.common.dao.UserDao;
 import com.framework.v1.business.common.model.UserModel;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.concurrent.*;
 public class DatabasesTester {
 
 
+    private static Logger logger = Logger.getLogger(DatabasesTester.class);
 
 
     @Autowired
@@ -46,8 +48,11 @@ public class DatabasesTester {
 
     }
 
+
+
     @Test
     public void testGetUsers(){
+        logger.warn("hhhhh");
         List<Map<String,Object>> users =userDao.getAllUsers();
         System.out.println(users.size());
     }
@@ -62,7 +67,7 @@ public class DatabasesTester {
     public void testSelectObject() throws Exception {
 
         UserModel userModel = new UserModel();
-        userModel.setId("1");
+        userModel.setId("3");
         userModel =  (UserModel)userDao.getjBaseDao().selectModel(userModel);
         System.out.println(userModel.getId());
 
@@ -73,8 +78,8 @@ public class DatabasesTester {
 
 
         UserModel userModel = new UserModel();
-        userModel.setId("2");
-        userModel.setPassword("wl22");
+        userModel.setId("1");
+        userModel.setPassword("wl2241");
         userModel =  (UserModel)userDao.getjBaseDao().updateModel(userModel);
         System.out.println(userModel.getId());
 
@@ -101,7 +106,7 @@ public class DatabasesTester {
     public void testDeleteObject() throws Exception {
 
         UserModel userModel = new UserModel();
-        userModel.setId("4");
+        userModel.setId("3");
         userModel =  (UserModel)userDao.getjBaseDao().deleteModel(userModel);
         System.out.println(userModel.getId());
 

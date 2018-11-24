@@ -12,8 +12,8 @@ public class UserDao extends BaseDao{
 
 
     public List<Map<String,Object>> getAllUsers(){
-        String sql= "select * from user";
-        return  getjBaseDao().queryForList(sql);
+        String sql= "select * from user where id = ?  order by id asc";
+        return  getjBaseDao().queryForList(sql,new Object[]{"1"});
     }
 
     public void updateAllUsers(){

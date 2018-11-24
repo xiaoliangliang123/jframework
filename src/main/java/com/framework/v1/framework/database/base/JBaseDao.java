@@ -179,12 +179,12 @@ public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Override
     public Map<String, Object> queryForMap(String s, @Nullable Object... objects) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().queryForMap(s,objects);
     }
 
     @Override
     public <T> List<T> queryForList(String s, Object[] objects, int[] ints, Class<T> aClass) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().queryForList(s,objects,ints,aClass);
     }
 
     @Override
@@ -199,12 +199,12 @@ public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Override
     public List<Map<String, Object>> queryForList(String s, Object[] objects, int[] ints) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().queryForList(s,objects,ints);
     }
 
     @Override
     public List<Map<String, Object>> queryForList(String s, @Nullable Object... objects) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().queryForList(s,objects);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class AxiosInterceptorAdapter extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:8088");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
 

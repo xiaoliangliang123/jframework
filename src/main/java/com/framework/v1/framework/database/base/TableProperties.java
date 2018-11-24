@@ -1,6 +1,8 @@
 package com.framework.v1.framework.database.base;
 
+import com.framework.v1.framework.util.LogUtil;
 import com.framework.v1.framework.util.StringUtil;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.lang.reflect.Field;
@@ -14,6 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 public class TableProperties {
+
+
+    private static Logger logger = Logger.getLogger(TableProperties.class);
+
+
 
     private String tableName;
     private List<String> pkeys;
@@ -140,7 +147,12 @@ public class TableProperties {
 
         String sql = retrunSelectSql();
 
+        Long startTime = System.currentTimeMillis();
         List<Map<String, Object>> mapList = jdbcTemplate.queryForList(sql, pkValues.toArray());
+        Long endTime = System.currentTimeMillis();
+        Long executeTime = endTime - startTime;
+
+        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
 
         if (mapList == null || mapList.isEmpty()) {
             return null;
@@ -154,7 +166,11 @@ public class TableProperties {
         String sql = retrunUpdateSql();
         colValues.removeAll(Collections.singleton(null));
         colValues.addAll(pkValues);
+        Long startTime = System.currentTimeMillis();
         int updateRows = jdbcTemplate.update(sql,colValues.toArray());
+        Long endTime = System.currentTimeMillis();
+        Long executeTime = endTime - startTime;
+        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
 
         if (updateRows == 0) {
             return null;
@@ -167,8 +183,11 @@ public class TableProperties {
         String sql = retrunInsertSql();
         colValues.addAll(pkValues);
         colValues.removeAll(Collections.singleton(null));
-
+        Long startTime = System.currentTimeMillis();
         int updateRows = jdbcTemplate.update(sql,colValues.toArray());
+        Long endTime = System.currentTimeMillis();
+        Long executeTime = endTime - startTime;
+        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
 
         if (updateRows == 0) {
             return null;
@@ -179,7 +198,13 @@ public class TableProperties {
     public BaseModel toDeleteModelInstance(JdbcTemplate jdbcTemplate, BaseModel baseModel) throws IllegalAccessException, NoSuchMethodException, InstantiationException, ClassNotFoundException, NoSuchFieldException {
 
         String sql = retrunDeleteSql();
+        Long startTime = System.currentTimeMillis();
+
         int updateRows = jdbcTemplate.update(sql,pkValues.toArray());
+        Long endTime = System.currentTimeMillis();
+        Long executeTime = endTime - startTime;
+        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
+
         if (updateRows == 0) {
             return null;
         }
