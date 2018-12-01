@@ -22,9 +22,11 @@ public class UserDao extends BaseDao{
     }
 
 
-    public void addUsers(){
-        String sql = "";
 
+    public boolean checkUsernameIsExsit(String username) {
+
+
+       Map map = getjBaseDao().getJdbcTemplate().queryForMap("select * from user where username = ?",new String[]{username});
+       return map!=null;
     }
-
 }

@@ -178,7 +178,7 @@ public class TableProperties {
         return baseModel;
     }
 
-    public BaseModel toInsertModelInstance(JdbcTemplate jdbcTemplate, BaseModel baseModel) throws IllegalAccessException, NoSuchMethodException, InstantiationException, ClassNotFoundException, NoSuchFieldException {
+    public BaseModel toInsertModelInstance(JdbcTemplate jdbcTemplate, BaseModel baseModel) throws Exception {
 
         String sql = retrunInsertSql();
         colValues.addAll(pkValues);

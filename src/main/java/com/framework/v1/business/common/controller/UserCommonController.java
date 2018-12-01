@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/common")
+@RequestMapping(value = "/common")
 public class UserCommonController {
 
     @Autowired
     private CommonService commonService;
 
-    @RequestMapping("/login")
+    @RequestMapping(name="用户登陆",value = "/login")
     @ResponseBody
     public JsonResult userInfo(HttpServletRequest request, HttpServletResponse response){
 
@@ -27,17 +27,6 @@ public class UserCommonController {
 
         JsonResult jsonResult = commonService.login(username,password);
         return jsonResult;
-    }
-
-    @RequestMapping("/info")
-    @ResponseBody
-    public String getUserinfo(HttpServletRequest request, HttpServletResponse response){
-
-        HttpSession session = request.getSession();
-        System.out.println(session.getId());
-        String username = (String) session.getAttribute("user");
-
-        return "username";
     }
 
 
