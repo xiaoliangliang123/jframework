@@ -26,7 +26,7 @@ public class UserDao extends BaseDao{
     public boolean checkUsernameIsExsit(String username) {
 
 
-       Map map = getjBaseDao().getJdbcTemplate().queryForMap("select * from user where username = ?",new String[]{username});
-       return map!=null;
+       List<Map<String,Object>> results = getjBaseDao().queryForList("select * from user where username = ?",new String[]{username});
+       return results!=null&&!results.isEmpty();
     }
 }
