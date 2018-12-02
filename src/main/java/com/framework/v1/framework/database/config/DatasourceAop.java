@@ -17,8 +17,7 @@ public class DatasourceAop {
 
 
     @Around("execution(* com..framework.database.base.*.select*(..)) || execution(* com..framework.database.base.*.get*(..))|| execution(* com..framework.database.base.*.query*(..))")
-    public Object doReadAdvice(ProceedingJoinPoint proceedingJoinPoint) {
-        try {
+    public Object doReadAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
             if (!DatasourceContextHolder.isSeturrentDb()) {
                 DatasourceContextHolder.read();
@@ -31,10 +30,7 @@ public class DatasourceAop {
             Long executeTime = endTime - startTime;
             return doAop(obj, params, executeTime);
 
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        return null;
+
     }
 
 
@@ -64,7 +60,7 @@ public class DatasourceAop {
             if (sql instanceof String && sql != null) {
                 String sqlLog = (String) sql;
 
-                if (params[1] != null) {
+                if (params.length >1 &&params[1] != null) {
                     Object[] sqlParams = (Object[]) params[1];
 
                     StringBuilder ps = new StringBuilder("");

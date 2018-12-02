@@ -6,4 +6,8 @@ import com.framework.v1.business.base.service.BaseService;
 public interface UserService {
 
     public JsonResult addUser(String username, String password) throws Exception;
+
+    JsonResult listUser(String username);
+
+    JsonResult baseList();
 }

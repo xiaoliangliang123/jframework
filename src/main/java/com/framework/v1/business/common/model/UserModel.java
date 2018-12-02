@@ -17,6 +17,18 @@ public class UserModel extends BaseModel {
     private String username ;
     private String password ;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    private String date
+
+            ;
+
 
     public String getUsername() {
         return username;
