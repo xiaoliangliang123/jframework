@@ -19,34 +19,45 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @RequestMapping(name = "添加用户" ,value = "/add",method = RequestMethod.POST)
+    @RequestMapping(name = "获取用户信息" ,value = "/getUserinfo",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult add(String username,String password) throws Exception {
+    public JsonResult getUserinfo(String userid) throws Exception {
+
+
+        //获取系统用户信息
+        JsonResult jsonResult = userService.getUserinfo(userid);
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "添加或编辑用户" ,value = "/addOrEdit",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult add(String userid,String username,String password) throws Exception {
 
 
         //添加新系统用户
-        JsonResult jsonResult = userService.addUser(username,password);
+        JsonResult jsonResult = userService.addOrEditUser(userid,username,password);
         return jsonResult;
     }
+
 
     @RequestMapping(name = "用户列表" ,value = "/list",method = RequestMethod.POST)
-    @ResponseBody
-    public JsonResult list(String username) throws Exception {
-
-
-        //添加新系统用户
-        JsonResult jsonResult = userService.listUser(username);
-        return jsonResult;
-    }
-
-    @RequestMapping(name = "初始化用户列表" ,value = "/init",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult list() throws Exception {
 
 
         //添加新系统用户
         JsonResult jsonResult = userService.baseList();
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "删除用户" ,value = "/del",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult del(String userId) throws Exception {
+
+
+
+        //添加新系统用户
+        JsonResult jsonResult = userService.removeUser(userId);
         return jsonResult;
     }
 }

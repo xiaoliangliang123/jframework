@@ -1,7 +1,6 @@
 package com.framework.v1.framework.database.config;
 
-public enum DatasourceType {
-
+public enum  DatasourceType {
     read("read", "从库"),
     write("write", "主库");
 

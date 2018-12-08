@@ -10,6 +10,30 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "sys.config")
 public class SysConfigBean {
 
+
+
+    public static String getDatabaseType() {
+        return databaseType;
+    }
+
+    public static boolean isMySql() {
+        return "mysql".endsWith(databaseType);
+    }
+
+    public static boolean isOracle() {
+        return "oracle".endsWith(databaseType);
+    }
+
+    public static boolean isSqlServer() {
+        return "sqlServer".endsWith(databaseType);
+    }
+
+    public void setDatabaseType(String databaseType) {
+        this.databaseType = databaseType;
+    }
+
+    private  static String databaseType;
+
     private String allowRequestAddress;
 
     public String getAllowRequestAddress() {

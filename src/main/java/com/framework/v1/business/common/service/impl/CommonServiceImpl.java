@@ -17,4 +17,10 @@ public class CommonServiceImpl extends BaseService implements CommonService{
 
         return new JsonResult(true,"登陆成功");
     }
+
+
+    @Override
+    public String baseQuery() {
+        return null;
+    }
 }

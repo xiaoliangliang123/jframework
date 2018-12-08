@@ -24,7 +24,14 @@ public class JsonResult extends HashMap<String, Object>
 	public static final String MESSAGE_PROP = "message";
 
 	public static final String DATA_PROP = "data";
-	
+
+	public static final String TOTALCOUNT_PROP = "totalCount";
+
+	public static final String START_PROP = "start";
+
+	public static final String LIMIT_PROP = "limit";
+
+
 	public static final String MESSAGE_OF_BEAN_VALIDATE = "INVALID_BEAN";
 
 	public JsonResult()
@@ -40,6 +47,8 @@ public class JsonResult extends HashMap<String, Object>
 		this.setData(data);
 	}
 
+
+
 	public JsonResult(Object data, int totalCount)
 	{
 		super();
@@ -52,6 +61,11 @@ public class JsonResult extends HashMap<String, Object>
 		super();
 		this.setSuccess(true);
 		this.setData(data);
+		this.setTotalCount(totalCount);
+		this.setStart(start);
+		this.setLimit(limit);
+
+
 	}
 
 	public JsonResult(boolean success, String message)
@@ -97,9 +111,45 @@ public class JsonResult extends HashMap<String, Object>
 		return r;
 	}
 
+	public Object getTotalCount()
+	{
+		Object r = this.get(TOTALCOUNT_PROP);
+		return r;
+	}
+
+	public Object getStart()
+	{
+		Object r = this.get(START_PROP);
+		return r;
+	}
+
+	public Object getLimit()
+	{
+		Object r = this.get(LIMIT_PROP);
+		return r;
+	}
+
 	public JsonResult setData(Object value)
 	{
 		this.put(DATA_PROP, value);
+		return this;
+	}
+
+	public JsonResult setTotalCount(Object value)
+	{
+		this.put(TOTALCOUNT_PROP, value);
+		return this;
+	}
+
+	public JsonResult setStart(Object value)
+	{
+		this.put(START_PROP, value);
+		return this;
+	}
+
+	public JsonResult setLimit(Object value)
+	{
+		this.put(LIMIT_PROP, value);
 		return this;
 	}
 
@@ -163,5 +213,6 @@ public class JsonResult extends HashMap<String, Object>
 		}
 		return str;
 	}
+
 
 }
