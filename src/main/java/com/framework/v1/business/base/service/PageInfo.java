@@ -66,7 +66,6 @@ public class PageInfo {
     public String toLimitSql(String sql) {
 
         if(SysConfigBean.isMySql()){
-
             return sql +" limit "+getStart() +" , "+ getPageSize();
         }else if(SysConfigBean.isOracle()){
 
@@ -78,5 +77,16 @@ public class PageInfo {
 
     public Integer getStart() {
         return (getCurrentPage()-1)*getPageSize();
+    }
+
+    public Integer getNoSqlStart() {
+
+        return (getCurrentPage()-1)*getPageSize()<=0 ?0:(getCurrentPage()-1)*getPageSize();
+    }
+
+    public Integer getNoSqlEnd(Integer totalCount) {
+
+        Integer count =  getCurrentPage()*getPageSize();
+        return count>=totalCount?totalCount:count;
     }
 }

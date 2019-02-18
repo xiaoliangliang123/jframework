@@ -1,4 +1,4 @@
-package com.framework.v1.business.common.dao;
+package com.framework.v1.business.sysUsers.dao;
 
 import com.framework.v1.framework.database.base.BaseDao;
 import com.framework.v1.framework.database.config.DatasourceContextHolder;
@@ -25,7 +25,6 @@ public class UserDao extends BaseDao {
 
     public boolean checkUsernameIsExsit(String username) {
 
-        DatasourceContextHolder.setCurrentDbWrite();
         List<Map<String, Object>> results = getjBaseDao().queryForList("select * from user where username = ?", new String[]{username});
         return results != null && !results.isEmpty();
     }

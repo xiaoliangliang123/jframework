@@ -1,4 +1,4 @@
-package com.framework.v1.business.common.model;
+package com.framework.v1.business.sysUsers.model;
 
 import com.framework.v1.framework.database.base.BaseModel;
 

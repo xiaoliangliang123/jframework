@@ -2,18 +2,13 @@ package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
-import com.framework.v1.business.common.dao.UserDao;
-import com.framework.v1.business.common.model.UserModel;
+import com.framework.v1.business.sysUsers.dao.UserDao;
+import com.framework.v1.business.sysUsers.model.UserModel;
 import com.framework.v1.business.sysUsers.service.UserService;
-import com.framework.v1.framework.database.config.DatasourceContextHolder;
 import com.framework.v1.framework.util.GenerateUtil;
 import com.framework.v1.framework.util.StringUtil;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
 @Service("userService")
 public class UserServiceImpl extends BaseService implements UserService {
@@ -77,6 +72,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     public String baseQuery() {
 
 
-        return "select * from user ";
+        return "select * from sys_user ";
     }
 }
