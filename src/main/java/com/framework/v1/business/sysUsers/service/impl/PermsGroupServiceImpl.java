@@ -4,7 +4,6 @@ import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
 import com.framework.v1.business.sysUsers.dao.PermsGroupDao;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
-import com.framework.v1.business.sysUsers.model.UserModel;
 import com.framework.v1.business.sysUsers.service.PermsGroupService;
 import com.framework.v1.business.sysUsers.service.UserService;
 import com.framework.v1.framework.util.GenerateUtil;
@@ -69,5 +68,13 @@ public class PermsGroupServiceImpl  extends BaseService implements PermsGroupSer
         sys_perms_groupModel = (Sys_Perms_GroupModel)getjBaseDao().selectModel(sys_perms_groupModel);
         return   new JsonResult(true,"获取权限集成功", sys_perms_groupModel) ;
 
+    }
+
+    @Override
+    public Sys_Perms_GroupModel getSysPermsModel(String uid) throws Exception {
+        Sys_Perms_GroupModel sys_perms_groupModel = new Sys_Perms_GroupModel();
+        sys_perms_groupModel.setUid(uid);
+        sys_perms_groupModel = (Sys_Perms_GroupModel)getjBaseDao().selectModel(sys_perms_groupModel);
+        return sys_perms_groupModel;
     }
 }

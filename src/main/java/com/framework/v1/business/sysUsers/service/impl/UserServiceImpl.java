@@ -3,7 +3,7 @@ package com.framework.v1.business.sysUsers.service.impl;
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
 import com.framework.v1.business.sysUsers.dao.UserDao;
-import com.framework.v1.business.sysUsers.model.UserModel;
+import com.framework.v1.business.sysUsers.model.Sys_UserModel;
 import com.framework.v1.business.sysUsers.service.UserService;
 import com.framework.v1.framework.util.GenerateUtil;
 import com.framework.v1.framework.util.StringUtil;
@@ -25,7 +25,7 @@ public class UserServiceImpl extends BaseService implements UserService {
                 JsonResult jsonResult = new JsonResult(false, "用户名已存在");
                 return jsonResult;
             }
-            UserModel userModel = new UserModel();
+            Sys_UserModel userModel = new Sys_UserModel();
             userModel.setId(GenerateUtil.uuid());
             userModel.setUsername(username);
             userModel.setPassword(password);
@@ -35,7 +35,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             return jsonResult;
 
         }else {
-            UserModel userModel = new UserModel();
+            Sys_UserModel userModel = new Sys_UserModel();
             userModel.setId(userid);
             userModel.setUsername(username);
             userModel.setPassword(password);
@@ -51,7 +51,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public JsonResult removeUser(String userId) throws Exception {
-        UserModel userModel = new UserModel();
+        Sys_UserModel userModel = new Sys_UserModel();
         userModel.setId(userId);
         getjBaseDao().deleteModel(userModel);
 
@@ -61,9 +61,9 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public JsonResult getUserinfo(String userId) throws Exception {
 
-        UserModel userModel = new UserModel();
+        Sys_UserModel userModel = new Sys_UserModel();
         userModel.setId(userId);
-        userModel = (UserModel) getjBaseDao().selectModel(userModel);
+        userModel = (Sys_UserModel) getjBaseDao().selectModel(userModel);
         return   new JsonResult(true, "获取用户信息成功",userModel) ;
     }
 

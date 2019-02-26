@@ -1,6 +1,6 @@
 import com.framework.v1.Application;
 import com.framework.v1.business.sysUsers.dao.UserDao;
-import com.framework.v1.business.sysUsers.model.UserModel;
+import com.framework.v1.business.sysUsers.model.Sys_UserModel;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,10 +66,10 @@ public class DatabasesTester {
     @Test
     public void testSelectObject() throws Exception {
 
-        UserModel userModel = new UserModel();
-        userModel.setId("3");
-        userModel =  (UserModel)userDao.getjBaseDao().selectModel(userModel);
-        System.out.println(userModel.getId());
+        Sys_UserModel Sys_UserModel = new Sys_UserModel();
+        Sys_UserModel.setId("3");
+        Sys_UserModel =  (Sys_UserModel)userDao.getjBaseDao().selectModel(Sys_UserModel);
+        System.out.println(Sys_UserModel.getId());
 
     }
 
@@ -77,11 +77,11 @@ public class DatabasesTester {
     public void testUpdateObject() throws Exception {
 
 
-        UserModel userModel = new UserModel();
-        userModel.setId("1");
-        userModel.setPassword("wl2241");
-        userModel =  (UserModel)userDao.getjBaseDao().updateModel(userModel);
-        System.out.println(userModel.getId());
+        Sys_UserModel Sys_UserModel = new Sys_UserModel();
+        Sys_UserModel.setId("1");
+        Sys_UserModel.setPassword("wl2241");
+        Sys_UserModel =  (Sys_UserModel)userDao.getjBaseDao().updateModel(Sys_UserModel);
+        System.out.println(Sys_UserModel.getId());
 
     }
 
@@ -90,12 +90,12 @@ public class DatabasesTester {
 
         long  start = System.currentTimeMillis();
         for(int i = 0 ; i < 1; i ++) {
-            UserModel userModel = new UserModel();
-            userModel.setId("xd010"+i);
-            userModel.setUsername("wl22");
-            userModel.setPassword("wl22");
-            userModel = (UserModel) userDao.getjBaseDao().updateModel(userModel);
-            //System.out.println(userModel.getId());
+            Sys_UserModel Sys_UserModel = new Sys_UserModel();
+            Sys_UserModel.setId("xd010"+i);
+            Sys_UserModel.setUsername("wl22");
+            Sys_UserModel.setPassword("wl22");
+            Sys_UserModel = (Sys_UserModel) userDao.getjBaseDao().updateModel(Sys_UserModel);
+            //System.out.println(Sys_UserModel.getId());
         }
         long  end = System.currentTimeMillis();
         System.out.println(end-start);
@@ -105,10 +105,10 @@ public class DatabasesTester {
     @Test
     public void testDeleteObject() throws Exception {
 
-        UserModel userModel = new UserModel();
-        userModel.setId("3");
-        userModel =  (UserModel)userDao.getjBaseDao().deleteModel(userModel);
-        System.out.println(userModel.getId());
+        Sys_UserModel Sys_UserModel = new Sys_UserModel();
+        Sys_UserModel.setId("3");
+        Sys_UserModel =  (Sys_UserModel)userDao.getjBaseDao().deleteModel(Sys_UserModel);
+        System.out.println(Sys_UserModel.getId());
 
     }
 

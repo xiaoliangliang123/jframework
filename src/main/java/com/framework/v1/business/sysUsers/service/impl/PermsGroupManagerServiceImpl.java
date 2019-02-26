@@ -36,6 +36,9 @@ public class PermsGroupManagerServiceImpl  extends BaseService implements PermsG
         return new JsonResult(perms,permissions.size(),1,0);
     }
 
+
+
+
     @Override
     public String baseQuery() {
         return null;

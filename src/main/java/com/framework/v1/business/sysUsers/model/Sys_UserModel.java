@@ -2,7 +2,7 @@ package com.framework.v1.business.sysUsers.model;
 
 import com.framework.v1.framework.database.base.BaseModel;
 
-public class UserModel extends BaseModel {
+public class Sys_UserModel extends BaseModel {
 
     private String id ;
 
