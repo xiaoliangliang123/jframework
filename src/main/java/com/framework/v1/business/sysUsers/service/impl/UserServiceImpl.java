@@ -2,6 +2,7 @@ package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
+import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.sysUsers.dao.UserDao;
 import com.framework.v1.business.sysUsers.model.Sys_UserModel;
 import com.framework.v1.business.sysUsers.service.UserService;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
-public class UserServiceImpl extends BaseService implements UserService {
+public class UserServiceImpl extends BaseServiceAdapter implements UserService {
 
 
     @Autowired

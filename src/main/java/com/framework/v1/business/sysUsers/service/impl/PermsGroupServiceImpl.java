@@ -2,6 +2,7 @@ package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
+import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.sysUsers.dao.PermsGroupDao;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
 import com.framework.v1.business.sysUsers.service.PermsGroupService;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PermsGroupServiceImpl  extends BaseService implements PermsGroupService {
+public class PermsGroupServiceImpl  extends BaseServiceAdapter implements PermsGroupService {
 
     @Autowired
     private PermsGroupDao permsGroupDao;

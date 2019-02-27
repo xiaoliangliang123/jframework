@@ -2,6 +2,7 @@ package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
+import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.base.service.PageInfo;
 import com.framework.v1.business.sysUsers.service.PermsService;
 import com.framework.v1.business.sysUsers.service.UserService;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 
 @Component
-public class PermsServiceImpl  extends BaseService implements PermsService {
+public class PermsServiceImpl  extends BaseServiceAdapter implements PermsService {
 
     @Resource
     private RequestMappingUtil requestMappingUtil;
@@ -40,8 +41,5 @@ public class PermsServiceImpl  extends BaseService implements PermsService {
         return new JsonResult(perms,permissions.size(),1,0);
     }
 
-    @Override
-    public String baseQuery() {
-        return null;
-    }
+
 }
