@@ -23,6 +23,9 @@ public class PermsServiceImpl  extends BaseService implements PermsService {
     @Resource
     private RequestMappingUtil requestMappingUtil;
 
+
+
+
     @Override
     public JsonResult baseList() throws Exception {
 

@@ -4,6 +4,7 @@ import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.base.service.BaseService;
 import com.framework.v1.business.base.service.PageInfo;
 import com.framework.v1.business.sysUsers.service.PermsGroupManagerService;
+import com.framework.v1.business.sysUsers.service.PermsGroupService;
 import com.framework.v1.framework.requestMapping.Permission;
 import com.framework.v1.framework.requestMapping.RequestMappingUtil;
 import org.springframework.stereotype.Component;
@@ -22,18 +23,14 @@ public class PermsGroupManagerServiceImpl  extends BaseService implements PermsG
     @Resource
     private RequestMappingUtil requestMappingUtil;
 
+    @Resource
+    private PermsGroupService permsGroupService;
+
+
     @Override
     public JsonResult baseList() throws Exception {
 
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Map map = request.getParameterMap();
-
-        PageInfo pageInfo = PageInfo.init(map);
-        List<Permission> permissions = requestMappingUtil.getPermissions();
-        List<Permission> perms = permissions.subList(pageInfo.getNoSqlStart(),pageInfo.getNoSqlEnd(permissions.size()));
-        //List<Permission> perms = permissions.subList(5,1);
-        return new JsonResult(perms,permissions.size(),1,0);
+        return permsGroupService.baseList();
     }
 
 

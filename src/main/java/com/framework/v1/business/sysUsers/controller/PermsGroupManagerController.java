@@ -39,6 +39,7 @@ public class PermsGroupManagerController {
         List<Permission> permissions = requestMappingUtil.getPermissions();
         Sys_Perms_GroupModel sysPermsGroupModel = (Sys_Perms_GroupModel)permsGroupService.getSysPermsModel(permsGroupId);
 
+
         PermissionGroupManagerDTO permissionGroupManager = new PermissionGroupManagerDTO(sysPermsGroupModel,permissions);
         return new JsonResult(permissionGroupManager);
     }
