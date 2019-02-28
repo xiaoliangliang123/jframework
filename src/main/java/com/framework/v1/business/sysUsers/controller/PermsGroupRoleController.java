@@ -26,4 +26,16 @@ public class PermsGroupRoleController {
         JsonResult jsonResult = permsGroupRoleService.baseList();
         return jsonResult;
     }
+
+
+
+    @RequestMapping(name = "添加或编辑权限集合" ,value = "/addOrEdit",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult addOrEdit(String uid,String roleId,String roleName) throws Exception {
+
+
+        //添加新系统权限集合
+        JsonResult jsonResult = permsGroupRoleService.addOrEditPermsRole(uid,roleId,roleName);
+        return jsonResult;
+    }
 }
