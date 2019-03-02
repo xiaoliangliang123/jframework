@@ -28,14 +28,33 @@ public class PermsGroupRoleController {
     }
 
 
-
-    @RequestMapping(name = "添加或编辑权限集合" ,value = "/addOrEdit",method = RequestMethod.POST)
+    @RequestMapping(name = "获取角色信息" ,value = "/getPermsRoleInfo",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult addOrEdit(String uid,String roleId,String roleName) throws Exception {
+    public JsonResult getPermsRoleInfo(String id) throws Exception {
+
+        //角色信息
+        JsonResult jsonResult = permsGroupRoleService.getPermsRoleInfoForId(id);
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "添加或编辑角色" ,value = "/addOrEdit",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult addOrEdit(String id,String roleId,String roleName) throws Exception {
 
 
         //添加新系统权限集合
-        JsonResult jsonResult = permsGroupRoleService.addOrEditPermsRole(uid,roleId,roleName);
+        JsonResult jsonResult = permsGroupRoleService.addOrEditPermsRole(id,roleId,roleName);
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "删除权限" ,value = "/del",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult del(String id) throws Exception {
+
+
+
+        //删除权限集合
+        JsonResult jsonResult = permsGroupRoleService.removePermsGroupRole(id);
         return jsonResult;
     }
 }

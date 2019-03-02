@@ -51,9 +51,26 @@ public class PermsGroupRoleServiceImpl  extends BaseServiceAdapter implements Pe
             permsRoleModel.setId(id);
             permsRoleModel.setRole_id(roleId);
             permsRoleModel.setRole_name(roleName);
-            getjBaseDao().insertModel(permsRoleModel);
+            getjBaseDao().updateModel(permsRoleModel);
             JsonResult jsonResult = new JsonResult(true, "编辑成功");
             return jsonResult;
         }
+    }
+
+    @Override
+    public JsonResult getPermsRoleInfoForId(String id) throws Exception {
+
+        Sys_Perms_RoleModel permsRoleModel = new Sys_Perms_RoleModel();
+        permsRoleModel.setId(id);
+        permsRoleModel = (Sys_Perms_RoleModel)getjBaseDao().selectModel(permsRoleModel);
+        return new JsonResult(permsRoleModel);
+    }
+
+    @Override
+    public JsonResult removePermsGroupRole(String id) throws Exception {
+        Sys_Perms_RoleModel permsRoleModel = new Sys_Perms_RoleModel();
+        permsRoleModel.setId(id);
+        getjBaseDao().deleteModel(permsRoleModel);
+        return  new JsonResult(true, "删除成功") ;
     }
 }
