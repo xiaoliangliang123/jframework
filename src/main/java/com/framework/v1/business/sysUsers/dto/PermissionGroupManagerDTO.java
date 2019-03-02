@@ -9,12 +9,18 @@ public class PermissionGroupManagerDTO {
 
     private final Sys_Perms_GroupModel sysPermsGroupModel;
     private final List<Permission> permissions;
+    private final List<String> urls;
 
-    public PermissionGroupManagerDTO(Sys_Perms_GroupModel sysPermsGroupModel, List<Permission> permissions) {
+    public PermissionGroupManagerDTO(Sys_Perms_GroupModel sysPermsGroupModel, List<Permission> permissions,List<String> urls) {
         this.sysPermsGroupModel = sysPermsGroupModel;
         this.permissions = permissions;
+        this.urls = urls;
+
     }
 
+    public List<String> getUrls() {
+        return urls;
+    }
 
     public Sys_Perms_GroupModel getSysPermsGroupModel() {
         return sysPermsGroupModel;

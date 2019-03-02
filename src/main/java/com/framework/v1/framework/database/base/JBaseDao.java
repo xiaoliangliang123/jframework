@@ -239,12 +239,12 @@ public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Override
     public int update(String s, @Nullable Object... objects) throws DataAccessException {
-        return 0;
+        return getJdbcTemplate().update(s,objects);
     }
 
     @Override
     public int[] batchUpdate(String s, BatchPreparedStatementSetter batchPreparedStatementSetter) throws DataAccessException {
-        return new int[0];
+        return getJdbcTemplate().batchUpdate(s,batchPreparedStatementSetter);
     }
 
     @Override
@@ -309,7 +309,7 @@ public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Override
     public <T> List<T> query(String s, RowMapper<T> rowMapper) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().query(s,rowMapper);
     }
 
     @Nullable
@@ -331,7 +331,7 @@ public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Override
     public <T> List<T> queryForList(String s, Class<T> aClass) throws DataAccessException {
-        return null;
+        return getJdbcTemplate().queryForList(s,aClass);
     }
 
     public List queryForList(String sql){

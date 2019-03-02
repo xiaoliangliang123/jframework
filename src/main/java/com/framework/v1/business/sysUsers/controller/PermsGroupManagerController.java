@@ -39,8 +39,17 @@ public class PermsGroupManagerController {
         List<Permission> permissions = requestMappingUtil.getPermissions();
         Sys_Perms_GroupModel sysPermsGroupModel = (Sys_Perms_GroupModel)permsGroupService.getSysPermsModel(permsGroupId);
 
-
-        PermissionGroupManagerDTO permissionGroupManager = new PermissionGroupManagerDTO(sysPermsGroupModel,permissions);
+        List<String> urls =permsGroupManagerService.queryPermsModuleUrlsWith(permsGroupId);
+        PermissionGroupManagerDTO permissionGroupManager = new PermissionGroupManagerDTO(sysPermsGroupModel,permissions,urls);
         return new JsonResult(permissionGroupManager);
+    }
+
+
+    @RequestMapping(name = "权限集保存" ,value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult list(String permsGroupId,String permsUrlValues) throws Exception {
+
+
+        return permsGroupManagerService.savePermsGroupUrls(permsGroupId,permsUrlValues);
     }
 }
