@@ -6,6 +6,7 @@ import com.framework.v1.business.sysUsers.dto.PermissionRoleManagerDTO;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_RoleModel;
 import com.framework.v1.business.sysUsers.service.PermsRoleManagerService;
+import com.framework.v1.business.sysUsers.vo.SysPermsGroupUrlVO;
 import com.framework.v1.framework.util.DataUtil;
 import com.framework.v1.framework.util.GenerateUtil;
 import org.apache.commons.beanutils.BeanUtils;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class PermsRoleManagerServiceImpl   extends BaseServiceAdapter implements PermsRoleManagerService {
@@ -31,9 +33,13 @@ public class PermsRoleManagerServiceImpl   extends BaseServiceAdapter implements
         List<Map> pgrMapList =  getjBaseDao().queryForList(sql);
 
         List<String> rolePermsGroupModels = DataUtil.getStringListForKey("uid", pgrMapList);
-        sql = "select * from sys_perms_group";
+        sql = "select  spg.uid as id, spg.name as name,spgus.perms_group_url as url from   sys_perms_group  spg , sys_perms_group_urls spgus  where  spgus.perms_group_id = spg.uid group by  spg.uid , spg.name ,spgus.perms_group_url ";
         List<Map> allPermsGroupModels =  getjBaseDao().queryForList(sql);
 
+        List<SysPermsGroupUrlVO> sysPermsGroupUrlVOS = DataUtil.copyListMap2ListBean(allPermsGroupModels,SysPermsGroupUrlVO.class);
+        Map<String, List<SysPermsGroupUrlVO>> sysPermsGroupUrlsMap = sysPermsGroupUrlVOS.stream().collect(Collectors.groupingBy(SysPermsGroupUrlVO::getName));
+                //DataUtil.groupBy(sysPermsGroupUrlVOS,SysPermsGroupUrlVO::getName);
+        System.out.println(sysPermsGroupUrlsMap.toString());
         Sys_Perms_RoleModel sys_perms_roleModel = new Sys_Perms_RoleModel();
         sys_perms_roleModel.setId(permsRoleId);
         sys_perms_roleModel =  (Sys_Perms_RoleModel) getjBaseDao().selectModel(sys_perms_roleModel);
