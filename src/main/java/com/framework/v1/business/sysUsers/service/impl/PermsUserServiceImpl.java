@@ -1,18 +1,17 @@
 package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
-import com.framework.v1.business.base.service.BaseService;
 import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.sysUsers.dao.UserDao;
 import com.framework.v1.business.sysUsers.model.Sys_UserModel;
-import com.framework.v1.business.sysUsers.service.UserService;
+import com.framework.v1.business.sysUsers.service.PermsUserService;
 import com.framework.v1.framework.util.GenerateUtil;
 import com.framework.v1.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
-public class UserServiceImpl extends BaseServiceAdapter implements UserService {
+public class PermsUserServiceImpl extends BaseServiceAdapter implements PermsUserService {
 
 
     @Autowired

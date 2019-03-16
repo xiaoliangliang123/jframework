@@ -3,7 +3,6 @@ package com.framework.v1.business.sysUsers.controller;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.sysUsers.service.PermsService;
-import com.framework.v1.business.sysUsers.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

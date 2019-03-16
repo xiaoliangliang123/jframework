@@ -16,14 +16,14 @@ public class PermsRoleManagerController {
     @Autowired
     private PermsRoleManagerService permsRoleManagerService;
 
-    @RequestMapping(name = "角色管理" ,value = "/list",method = RequestMethod.POST)
+    @RequestMapping(name = "角色权限列表" ,value = "/list",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult list(String permsRoleId) throws Exception {
 
         return permsRoleManagerService.queryModulesForRoleId(permsRoleId);
     }
 
-    @RequestMapping(name = "角色权限集保存" ,value = "/save",method = RequestMethod.POST)
+    @RequestMapping(name = "角色权限保存" ,value = "/save",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult list(String permsRoleId,String[] permsRoleUrls) throws Exception {
 

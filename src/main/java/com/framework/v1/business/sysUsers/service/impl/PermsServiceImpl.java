@@ -1,11 +1,9 @@
 package com.framework.v1.business.sysUsers.service.impl;
 
 import com.framework.v1.business.base.model.JsonResult;
-import com.framework.v1.business.base.service.BaseService;
 import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.base.service.PageInfo;
 import com.framework.v1.business.sysUsers.service.PermsService;
-import com.framework.v1.business.sysUsers.service.UserService;
 import com.framework.v1.framework.requestMapping.Permission;
 import com.framework.v1.framework.requestMapping.RequestMappingUtil;
 import org.springframework.stereotype.Component;

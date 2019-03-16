@@ -2,13 +2,12 @@ package com.framework.v1.business.sysUsers.controller;
 
 
 import com.framework.v1.business.base.model.JsonResult;
-import com.framework.v1.business.sysUsers.service.UserService;
+import com.framework.v1.business.sysUsers.service.PermsUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/sys_user")
@@ -17,7 +16,7 @@ public class PermsUserController {
 
 
     @Autowired
-    private UserService userService;
+    private PermsUserService userService;
 
     @RequestMapping(name = "获取用户信息" ,value = "/getUserinfo",method = RequestMethod.POST)
     @ResponseBody
