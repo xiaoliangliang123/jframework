@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/sys_user")
-public class SysUserController {
+public class PermsUserController {
 
 
 
