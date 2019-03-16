@@ -20,4 +20,14 @@ public class RequestMappingUtil {
     public List<Permission> getPermissions() {
         return permissions;
     }
+
+    public Permission getPermissionForUrl(String url) throws NoSuchFieldException {
+        for(Permission perm:permissions){
+            if(perm.urlIs(url)){
+                return perm;
+            }
+        }
+        throw  new NoSuchFieldException("url:"+url +" 没有对应的权限名称");
+    }
+
 }

@@ -25,8 +25,8 @@ public class PermsRoleManagerController {
 
     @RequestMapping(name = "角色权限集保存" ,value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult list(String permsRoleId,String permsModulesIds) throws Exception {
+    public JsonResult list(String permsRoleId,String[] permsRoleUrls) throws Exception {
 
-        return permsRoleManagerService.savePermsModules(permsRoleId,permsModulesIds);
+        return permsRoleManagerService.savePermsRoleUrls(permsRoleId,permsRoleUrls);
     }
 }

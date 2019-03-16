@@ -13,6 +13,7 @@ public class ErrorController {
     @ExceptionHandler(value = Exception.class)
     public JsonResult errorHandler(Exception e) {
 
+        e.printStackTrace();
         return new JsonResult(false,e.getMessage());
     }
 }

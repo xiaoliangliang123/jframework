@@ -90,4 +90,8 @@ public class Permission {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+    public boolean urlIs(String url) {
+        return this.getUrl().equals(url);
+    }
 }

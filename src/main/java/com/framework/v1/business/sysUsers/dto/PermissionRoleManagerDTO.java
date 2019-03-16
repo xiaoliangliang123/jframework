@@ -2,6 +2,7 @@ package com.framework.v1.business.sysUsers.dto;
 
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_RoleModel;
+import com.framework.v1.business.sysUsers.vo.SysPermsGroupUrlVO;
 
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,12 @@ public class PermissionRoleManagerDTO {
 
 
     private  Sys_Perms_RoleModel sys_perms_roleModel;
-    private  List<Map> allPermsGroupModels;
-    private  List<String> rolePermsGroupModels;
+    private  Map<String, List<SysPermsGroupUrlVO>> allPermsGroupModels;
+    private  List<String> rolePermsGroupUrls;
 
-    public PermissionRoleManagerDTO(Sys_Perms_RoleModel sys_perms_roleModel, List<String> rolePermsGroupModels, List<Map> allPermsGroupModels) {
+    public PermissionRoleManagerDTO(Sys_Perms_RoleModel sys_perms_roleModel, List<String> rolePermsGroupModels,Map<String, List<SysPermsGroupUrlVO>> allPermsGroupModels) {
         this.sys_perms_roleModel = sys_perms_roleModel;
-        this.rolePermsGroupModels = rolePermsGroupModels;
+        this.rolePermsGroupUrls = rolePermsGroupModels;
         this.allPermsGroupModels = allPermsGroupModels;
     }
 
@@ -23,11 +24,11 @@ public class PermissionRoleManagerDTO {
         return sys_perms_roleModel;
     }
 
-    public List<Map> getAllPermsGroupModels() {
+    public Map<String, List<SysPermsGroupUrlVO>> getAllPermsGroupModels() {
         return allPermsGroupModels;
     }
 
-    public List<String> getRolePermsGroupModels() {
-        return rolePermsGroupModels;
+    public List<String> getRolePermsGroupUrls() {
+        return rolePermsGroupUrls;
     }
 }

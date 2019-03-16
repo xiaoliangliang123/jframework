@@ -8,5 +8,5 @@ public interface PermsRoleManagerService   extends   BaseQuery {
 
     JsonResult queryModulesForRoleId(String permsRoleId) throws Exception;
 
-    JsonResult savePermsModules(String permsRoleId, String permsModulesIds);
+    JsonResult savePermsRoleUrls(String permsRoleId, String[] permsRoleUrls);
 }
