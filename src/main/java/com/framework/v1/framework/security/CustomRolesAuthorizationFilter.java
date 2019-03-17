@@ -20,6 +20,8 @@ public class CustomRolesAuthorizationFilter extends AuthorizationFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
             throws Exception {
 
+
+
         UserVO userVO = (UserVO)SecurityUtils.getSubject().getPrincipal();
         String requestPath = getRequestPath(request);
         if(StringUtil.isEmpty(userVO)){
@@ -27,6 +29,8 @@ public class CustomRolesAuthorizationFilter extends AuthorizationFilter {
         }
         Boolean hasPerm =  userVO.hasPermissionForParh(requestPath);
         return hasPerm;
+
+
     }
 
     protected String getRequestPath(ServletRequest request) {
