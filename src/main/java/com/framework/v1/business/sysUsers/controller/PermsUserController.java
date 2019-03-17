@@ -30,11 +30,11 @@ public class PermsUserController {
 
     @RequestMapping(name = "添加或编辑用户" ,value = "/addOrEdit",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult add(String userid,String username,String password) throws Exception {
+    public JsonResult add(String userid,String username,String nickname) throws Exception {
 
 
         //添加新系统用户
-        JsonResult jsonResult = userService.addOrEditUser(userid,username,password);
+        JsonResult jsonResult = userService.addOrEditUser(userid,username,nickname);
         return jsonResult;
     }
 
@@ -42,7 +42,6 @@ public class PermsUserController {
     @RequestMapping(name = "用户列表" ,value = "/list",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult list() throws Exception {
-
 
         //添加新系统用户
         JsonResult jsonResult = userService.baseList();

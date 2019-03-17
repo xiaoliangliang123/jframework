@@ -1,5 +1,7 @@
 package com.framework.v1.framework.database.base;
 
+import com.framework.v1.framework.util.DataUtil;
+import com.framework.v1.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
@@ -364,5 +366,22 @@ public class JBaseDao implements JdbcOperations,JModelDao{
     @Override
     public BaseModel deleteModel(BaseModel baseModel) throws Exception {
         return jModelDao.deleteModel(baseModel);
+    }
+
+    public Integer queryForInt(String sql, Object[] objects) {
+        List<Map<String, Object>>  results =  this.queryForList(sql,objects);
+        if(StringUtil.isEmpty(results)){
+            return 0;
+        }
+        return results.size();
+    }
+
+    public String queryForString(String sql, Object[] objects) {
+        List<Map<String, Object>>  results =  this.queryForList(sql,objects);
+        if(StringUtil.isEmpty(results)){
+            return null;
+        }
+        Map map = results.get(0);
+        return (String) map.get(map.keySet().toArray()[0]);
     }
 }

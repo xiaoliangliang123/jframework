@@ -1,5 +1,6 @@
 package com.framework.v1.framework.util;
 
+import java.util.List;
 import java.util.Map;
 
 public class StringUtil {
@@ -12,10 +13,16 @@ public class StringUtil {
     }
 
     public static boolean isEmpty(Object s) {
-        if(s!=null&&!s.equals("")){
-            return false;
+
+        if(s==null||s.equals("")||s.equals("null")){
+            return true;
         }
-        return true;
+        if(s instanceof List){
+            if(((List)s).size() <=0){
+                return true;
+            }
+        }
+        return false;
     }
 
 

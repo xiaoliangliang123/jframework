@@ -8,74 +8,57 @@ import java.util.List;
 public class Role {
 
 
-    private String id ;
-    private String name ;
 
-    private String sign ;
+    private String id;
+    private String role_id ;
+    private String role_name ;
 
-    private Boolean checked = false;
-
-    public Boolean getChecked() {
-        return checked;
-    }
-
-    public void setChecked(Boolean checked) {
-        this.checked = checked;
-    }
-
-    Role(){}
-
-    public Role(String id, String name , String sign) {
-        this.id = id ;
-        this.name = name;
-        this.sign = sign;
-    }
 
     public String getId() {
         return id;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRole_id() {
+        return role_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
     }
 
-    public static List<Role> loadAndCheck(List<Role> roles, List<Role> allRoles) {
-        List<Role> plist = new ArrayList<Role>();
-        plist.addAll(allRoles);
-        if(plist == null ||plist.isEmpty())
-            return plist;
-        for(Role role :plist){
-            role.setChecked(false);
-            if(role.isInRole(roles)){
-                role.setChecked(true);
-            }
-        }
-        return plist;
+    public String getRole_name() {
+        return role_name;
     }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
+
+    public String getRoleId(){
+        return role_id;
+    }
+
+    public String getRoleName(){
+        return role_name;
+    }
+
+
+    public Role(){}
+
+
 
     private boolean isInRole(List<Role> roles) {
         if(roles == null || roles.isEmpty())
             return false;
         for(Role rp : roles){
-            if(this.id.equals(rp.getId()))
+            if(this.role_id.equals(rp.getRole_id()))
                 return  true;
         }
         return false;
     }
+
 }

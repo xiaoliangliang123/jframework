@@ -17,6 +17,10 @@ public class Permission {
 
     public Permission(){}
 
+    public Permission(String url){
+        this.url = url;
+    }
+
     public Permission(String url, String method, String commont) {
         this.url = url;
         this.method = method;
@@ -93,5 +97,19 @@ public class Permission {
 
     public boolean urlIs(String url) {
         return this.getUrl().equals(url);
+    }
+
+    public static Boolean hasUrl(String requestPath,List<Permission> permissions) {
+
+        for(Permission permission :permissions){
+            if(permission.hasUrl(requestPath)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public  Boolean hasUrl(String requestPath) {
+        return this.url.equals(requestPath);
     }
 }

@@ -6,6 +6,16 @@ public class Sys_UserModel extends BaseModel {
 
     private String id ;
 
+    private String nickname ;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public String getId() {
         return id;
     }
