@@ -43,7 +43,6 @@ public class PermsUserController {
     @ResponseBody
     public JsonResult list() throws Exception {
 
-        //添加新系统用户
         JsonResult jsonResult = userService.baseList();
         return jsonResult;
     }
