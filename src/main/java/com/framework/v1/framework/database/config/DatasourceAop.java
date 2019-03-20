@@ -1,27 +1,29 @@
 package com.framework.v1.framework.database.config;
 
+import com.framework.v1.framework.database.base.BaseDao;
 import com.framework.v1.framework.database.base.BaseModel;
 import com.framework.v1.framework.util.LogUtil;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @Aspect
 @Component
-public class DatasourceAop {
+public class DatasourceAop extends BaseDao {
 
     private static Logger logger = Logger.getLogger(DatasourceAop.class);
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate ;
 
-    @Around("execution(* com..framework.database.base.*.select*(..)) || execution(* com..framework.database.base.*.get*(..))|| execution(* com..framework.database.base.*.query*(..))")
+
+
+    @Around("execution(* com..framework.database.base.JBaseDao.query*(..))||execution(* com..framework.database.base.JBaseDao.insert*(..))||execution(* com..framework.database.base.JBaseDao.update*(..))||execution(* com..framework.database.base.JBaseDao.delete*(..))")
     public Object doReadAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
             if (!DatasourceContextHolder.isSeturrentDb()) {
@@ -75,9 +77,10 @@ public class DatasourceAop {
                         String pp = (String) p;
                         ps.append(pp + ",");
                     }
-                    LogUtil.logAopExecute(logger, sqlLog, ps.toString(), executeTime);
+
+                    LogUtil.logAopExecute(jdbcTemplate,logger, sqlLog, ps.toString(), executeTime);
                 } else {
-                    LogUtil.logAopExecute(logger, sqlLog, "null", executeTime);
+                    LogUtil.logAopExecute(jdbcTemplate,logger, sqlLog, "null", executeTime);
                 }
             }
         }

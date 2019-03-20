@@ -1,7 +1,5 @@
 package com.framework.v1.framework.database.base;
 
-import com.framework.v1.framework.database.config.DatasourceAop;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

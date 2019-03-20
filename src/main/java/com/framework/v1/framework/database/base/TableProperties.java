@@ -152,7 +152,7 @@ public class TableProperties {
         Long endTime = System.currentTimeMillis();
         Long executeTime = endTime - startTime;
 
-        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
+        LogUtil.logModelExcute(jdbcTemplate,logger,sql,pkValues,executeTime);
 
         if (mapList == null || mapList.isEmpty()) {
             return null;
@@ -170,7 +170,7 @@ public class TableProperties {
         int updateRows = jdbcTemplate.update(sql,colValues.toArray());
         Long endTime = System.currentTimeMillis();
         Long executeTime = endTime - startTime;
-        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
+        LogUtil.logModelExcute(jdbcTemplate,logger,sql,pkValues,executeTime);
 
         if (updateRows == 0) {
             return null;
@@ -187,7 +187,7 @@ public class TableProperties {
         int updateRows = jdbcTemplate.update(sql,colValues.toArray());
         Long endTime = System.currentTimeMillis();
         Long executeTime = endTime - startTime;
-        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
+        LogUtil.logModelExcute(jdbcTemplate,logger,sql,pkValues,executeTime);
 
         if (updateRows == 0) {
             return null;
@@ -203,7 +203,7 @@ public class TableProperties {
         int updateRows = jdbcTemplate.update(sql,pkValues.toArray());
         Long endTime = System.currentTimeMillis();
         Long executeTime = endTime - startTime;
-        LogUtil.logModelExcute(logger,sql,pkValues,executeTime);
+        LogUtil.logModelExcute(jdbcTemplate,logger,sql,pkValues,executeTime);
 
         if (updateRows == 0) {
             return null;

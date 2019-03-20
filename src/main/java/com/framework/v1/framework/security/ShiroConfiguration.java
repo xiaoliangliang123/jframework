@@ -17,11 +17,12 @@ import java.util.Map;
 @Configuration
 public class ShiroConfiguration {
     //将自己的验证方式加入容器
-    @Bean
-    public MyRealm myShiroRealm() {
-        MyRealm myShiroRealm = new MyRealm();
+    @Bean(value = "costomRealm")
+    public CostomRealm myShiroRealm() {
+
+        CostomRealm myShiroRealm = new CostomRealm();
         myShiroRealm.setCredentialsMatcher(new CredentialsMatcher());
-         return myShiroRealm;
+        return myShiroRealm;
     }
 
 
@@ -31,10 +32,10 @@ public class ShiroConfiguration {
 
 
     //权限管理，配置主要是Realm的管理认证
-    @Bean
+    @Bean(value = "securityManager")
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
+        //securityManager.setRealm(myShiroRealm());
         return securityManager;
     }
 

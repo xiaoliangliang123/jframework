@@ -18,7 +18,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class MyRealm extends AuthorizingRealm {
+public class CostomRealm extends AuthorizingRealm {
 
 
 

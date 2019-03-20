@@ -1,5 +1,6 @@
 package com.framework.v1.framework.database.base;
 
+import com.framework.v1.framework.database.config.LogAspect;
 import com.framework.v1.framework.util.DataUtil;
 import com.framework.v1.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@Repository("jBaseDao")
+@Repository
 public class JBaseDao implements JdbcOperations,JModelDao{
 
     @Autowired
@@ -180,11 +181,13 @@ public class JBaseDao implements JdbcOperations,JModelDao{
     }
 
     @Override
+    @LogAspect
     public Map<String, Object> queryForMap(String s, @Nullable Object... objects) throws DataAccessException {
         return getJdbcTemplate().queryForMap(s,objects);
     }
 
     @Override
+    @LogAspect
     public <T> List<T> queryForList(String s, Object[] objects, int[] ints, Class<T> aClass) throws DataAccessException {
         return getJdbcTemplate().queryForList(s,objects,ints,aClass);
     }
