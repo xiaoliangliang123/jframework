@@ -7,6 +7,7 @@ import com.framework.v1.business.sysUsers.dao.PermsRoleDao;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_RoleModel;
 import com.framework.v1.business.sysUsers.service.PermsGroupRoleService;
+import com.framework.v1.framework.database.base.QueryParams;
 import com.framework.v1.framework.util.GenerateUtil;
 import com.framework.v1.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class PermsGroupRoleServiceImpl  extends BaseServiceAdapter implements Pe
 
 
     @Override
-    public String baseQuery() {
+    public QueryParams baseQuery() {
 
 
-        return "select * from sys_perms_role ";
+        return new QueryParams("select * from sys_perms_role ","");
     }
 
     @Override

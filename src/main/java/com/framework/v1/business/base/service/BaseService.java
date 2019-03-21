@@ -2,6 +2,7 @@ package com.framework.v1.business.base.service;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.framework.database.base.BaseDao;
+import com.framework.v1.framework.database.base.QueryParams;
 import com.framework.v1.framework.util.StringUtil;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,10 +22,12 @@ public abstract class BaseService extends BaseDao {
 
         PageInfo pageInfo = PageInfo.init(map);
         Map qps =  getQueryParams(map);
-        String sql =  baseQuery();
+        QueryParams queryParams = baseQuery();
+        String sql =  queryParams.getQuerySql();
+        String orderBySql = queryParams.getOrderBySql();
         sql = wapperSqlInWhere(qps,sql);
         String countSql ="select count(*)  _totalCount from ("+sql+")xx_count";
-        String limitSql = pageInfo.toLimitSql(sql);
+        String limitSql = pageInfo.toLimitSql(sql,orderBySql);
         Map countMap = new HashMap() ;
         if(StringUtil.isEmpty(qps)) {
              countMap = getjBaseDao().getJdbcTemplate().queryForMap(countSql);
@@ -87,7 +90,7 @@ public abstract class BaseService extends BaseDao {
         return queryMap;
     }
 
-    public abstract String baseQuery() ;
+    public abstract QueryParams baseQuery() ;
 
 
 }

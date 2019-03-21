@@ -5,6 +5,7 @@ import com.framework.v1.business.base.service.BaseServiceAdapter;
 import com.framework.v1.business.sysUsers.dao.PermsGroupDao;
 import com.framework.v1.business.sysUsers.model.Sys_Perms_GroupModel;
 import com.framework.v1.business.sysUsers.service.PermsGroupService;
+import com.framework.v1.framework.database.base.QueryParams;
 import com.framework.v1.framework.util.GenerateUtil;
 import com.framework.v1.framework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class PermsGroupServiceImpl  extends BaseServiceAdapter implements PermsG
     private PermsGroupDao permsGroupDao;
 
     @Override
-    public String baseQuery() {
-        return "select * from sys_perms_group";
+    public QueryParams baseQuery() {
+        return new QueryParams("select * from sys_perms_group","");
     }
 
     @Override

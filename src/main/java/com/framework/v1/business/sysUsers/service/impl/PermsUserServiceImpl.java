@@ -6,6 +6,7 @@ import com.framework.v1.business.sysUsers.dao.UserDao;
 import com.framework.v1.business.sysUsers.model.Sys_UserModel;
 import com.framework.v1.business.sysUsers.service.PermsUserService;
 import com.framework.v1.business.sysUsers.vo.UserVO;
+import com.framework.v1.framework.database.base.QueryParams;
 import com.framework.v1.framework.requestMapping.Permission;
 import com.framework.v1.framework.requestMapping.Role;
 import com.framework.v1.framework.util.DataUtil;
@@ -114,9 +115,9 @@ public class PermsUserServiceImpl extends BaseServiceAdapter implements PermsUse
     }
 
     @Override
-    public String baseQuery() {
+    public QueryParams baseQuery() {
 
 
-        return "select * from sys_user ";
+        return new QueryParams("select * from sys_user ","");
     }
 }

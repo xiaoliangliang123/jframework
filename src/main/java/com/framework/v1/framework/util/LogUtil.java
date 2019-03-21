@@ -21,22 +21,23 @@ public class LogUtil {
     }
 
     private static void insertIntoReadSqlMonitor(Logger logger,JdbcTemplate jdbcTemplate,String sql, String params, Long executeTime) {
-        String msql = "insert into sys_monitor_sql values(?,?,?,?,?,?) ";
+        String msql = "insert into sys_monitor_sql values(?,?,?,?,?,?,?,?,?) ";
         String id = GenerateUtil.uuid();
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
         RemoteVister remoteVister =  WebPropertyUtil.getRemoteVister(request);
-        jdbcTemplate.update(msql,new Object[]{id,sql,params,executeTime,remoteVister.getIP(),remoteVister.getHost()});
+        jdbcTemplate.update(msql,new Object[]{id,sql,params,executeTime,remoteVister.getIP(),remoteVister.getHost(),remoteVister.getUsername(),remoteVister.getUrl(),remoteVister.getTime()});
         logger.info("execute  action :read , sql :" + sql + " , SqlParams :" + params + " invokeTime " + executeTime + " ms");
 
     }
 
     private static void insertIntoWriteSqlMonitor(Logger logger,JdbcTemplate jdbcTemplate,String sql, String params, Long executeTime) {
-        String msql = "insert into sys_monitor_sql values(?,?,?,?,?,?) ";
+        String msql = "insert into sys_monitor_sql values(?,?,?,?,?,?,?,?,?) ";
         String id = GenerateUtil.uuid();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         RemoteVister remoteVister =  WebPropertyUtil.getRemoteVister(request);
-        jdbcTemplate.update(msql,new Object[]{id,sql,params,executeTime,remoteVister.getIP(),remoteVister.getHost()});
+        jdbcTemplate.update(msql,new Object[]{id,sql,params,executeTime,remoteVister.getIP(),remoteVister.getHost(),remoteVister.getUsername(),remoteVister.getUrl(),remoteVister.getTime()});
         logger.info("execute  action :write , sql :" + sql + " , SqlParams :" + params + " invokeTime " + executeTime + " ms");
     }
 

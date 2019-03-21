@@ -1,6 +1,7 @@
 package com.framework.v1.framework.util;
 
 import com.framework.v1.business.sysUsers.vo.UserVO;
+import org.apache.shiro.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,22 +28,49 @@ public class WebPropertyUtil {
 
 class RemoteVister{
 
+    private String time;
     private String ip ;
     private String host ;
+    private String username ;
+    private String url ;
 
-    public RemoteVister(String ip,String host){
+
+    public RemoteVister(String username,String url,String ip,String host,String time){
         this.ip = ip;
         this.host = host;
+        this.username = username;
+        this.url = url;
+        this.time = time ;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public static  RemoteVister  init(HttpServletRequest request){
+
+        UserVO userVO = (UserVO) SecurityUtils.getSubject().getPrincipal();
         String ip = request.getRemoteAddr();
         String host = request.getRemoteHost();
-        RemoteVister remoteVister = new RemoteVister(ip,host);
+        String url = request.getRequestURL().toString();
+        String time = GenerateUtil.currentTime();
+        String username ="";
+        if(userVO!=null){
+            username = userVO.getSysUserModel().getUsername();
+        }
+        RemoteVister remoteVister = new RemoteVister(username,url,ip,host,time);
 
         return remoteVister;
     }
 
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 
     public String getIP() {
         return ip;

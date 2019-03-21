@@ -1,6 +1,7 @@
 package com.framework.v1.business.base.service;
 
 import com.framework.v1.framework.database.config.SysConfigBean;
+import com.framework.v1.framework.util.StringUtil;
 import net.sf.json.JSONObject;
 
 import java.util.Map;
@@ -65,7 +66,24 @@ public class PageInfo {
 
     public String toLimitSql(String sql) {
 
+
         if(SysConfigBean.isMySql()){
+
+            return sql +" limit "+getStart() +" , "+ getPageSize();
+        }else if(SysConfigBean.isOracle()){
+
+        }else if(SysConfigBean.isSqlServer()){
+
+        }
+        return sql;
+    }
+
+    public String toLimitSql(String sql,String orderBySql) {
+
+        if(SysConfigBean.isMySql()){
+            if(!StringUtil.isEmpty(orderBySql)){
+                return sql +" "+orderBySql+" limit "+getStart() +" , "+ getPageSize();
+            }
             return sql +" limit "+getStart() +" , "+ getPageSize();
         }else if(SysConfigBean.isOracle()){
 

@@ -9,6 +9,7 @@ import com.framework.v1.business.sysUsers.model.Sys_UserModel;
 import com.framework.v1.business.sysUsers.service.PermsUserService;
 import com.framework.v1.business.sysUsers.vo.SysPermsGroupUrlVO;
 import com.framework.v1.business.sysUsers.vo.UserVO;
+import com.framework.v1.framework.database.base.QueryParams;
 import com.framework.v1.framework.requestMapping.Permission;
 import com.framework.v1.framework.requestMapping.Role;
 import com.framework.v1.framework.util.DataUtil;
@@ -51,7 +52,7 @@ public class CommonServiceImpl extends BaseService implements CommonService{
 
 
     @Override
-    public String baseQuery() {
+    public QueryParams baseQuery() {
         return null;
     }
 }
