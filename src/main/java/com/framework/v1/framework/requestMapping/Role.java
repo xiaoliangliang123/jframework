@@ -1,12 +1,16 @@
 package com.framework.v1.framework.requestMapping;
 
 
+import com.framework.v1.framework.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Role {
 
+
+    public static String SUPER_ADMIN = "SUPER_ADMIN";
 
 
     private String id;
@@ -61,4 +65,19 @@ public class Role {
         return false;
     }
 
+    public static boolean hasRoleIdOf(String roleId, List<Role> roles) {
+        if(StringUtil.isEmpty(roles)){
+            return false;
+        }
+        for(Role role:roles){
+            if(role.isIdOf(roleId)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isIdOf(String roleId) {
+        return roleId.equals(getRole_id());
+    }
 }

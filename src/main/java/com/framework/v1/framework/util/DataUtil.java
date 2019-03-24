@@ -1,15 +1,11 @@
 package com.framework.v1.framework.util;
 
-import com.framework.v1.business.sysUsers.vo.SysPermsGroupUrlVO;
-import com.sun.javafx.collections.MappingChange;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class DataUtil {
     public static List<String> getStringListForKey(String key, List<Map> mapList) {
@@ -46,5 +42,16 @@ public class DataUtil {
 
     public static <T> Map<String,List<T>> groupBy(List<T> objList,Function<String,String>  getName) {
         return  null;
+    }
+
+    public static List<Map> insertRowIntoMapList(String rowName,String defaultValue,List<Map> data) {
+        if(StringUtil.isEmpty(data)){
+            return null;
+        }
+        for(int i = 0 ; i < data.size(); i++ ){
+            Map map = data.get(i);
+            map.put(rowName,defaultValue);
+        }
+        return data;
     }
 }

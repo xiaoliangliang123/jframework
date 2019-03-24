@@ -1,6 +1,6 @@
 package com.framework.v1.framework.util;
 
-import com.framework.v1.business.sysUsers.vo.UserVO;
+import com.framework.v1.business.sysSetting.sysUsers.vo.UserVO;
 import org.apache.shiro.SecurityUtils;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
 import com.framework.v1.Application;
-import com.framework.v1.business.sysUsers.dao.UserDao;
-import com.framework.v1.business.sysUsers.model.Sys_UserModel;
+import com.framework.v1.business.sysSetting.sysUsers.dao.UserDao;
+import com.framework.v1.business.sysSetting.sysUsers.model.Sys_UserModel;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;

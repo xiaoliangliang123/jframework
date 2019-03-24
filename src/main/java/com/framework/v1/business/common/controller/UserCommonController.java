@@ -2,10 +2,9 @@ package com.framework.v1.business.common.controller;
 
 import com.framework.v1.business.base.model.JsonResult;
 import com.framework.v1.business.common.service.CommonService;
-import com.framework.v1.business.sysUsers.vo.UserVO;
+import com.framework.v1.business.sysSetting.sysUsers.vo.UserVO;
 import com.framework.v1.framework.util.StringUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
 
 @Controller
 @RequestMapping(value = "/common")

@@ -1,11 +1,8 @@
 package com.framework.v1.framework.security;
 
 
-import com.framework.v1.business.sysUsers.model.Sys_UserModel;
-import com.framework.v1.business.sysUsers.service.PermsUserService;
-import com.framework.v1.business.sysUsers.vo.UserVO;
-import com.framework.v1.framework.util.GenerateUtil;
-import com.framework.v1.framework.util.StringUtil;
+import com.framework.v1.business.sysSetting.sysUsers.service.PermsUserService;
+import com.framework.v1.business.sysSetting.sysUsers.vo.UserVO;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -16,7 +13,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 public class CostomRealm extends AuthorizingRealm {
 

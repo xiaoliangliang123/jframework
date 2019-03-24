@@ -1,11 +1,10 @@
 package com.framework.v1.framework.security;
 
-import com.framework.v1.business.sysUsers.vo.UserVO;
+import com.framework.v1.business.sysSetting.sysUsers.vo.UserVO;
 import com.framework.v1.framework.error.NoLoginException;
+import com.framework.v1.framework.requestMapping.Role;
 import com.framework.v1.framework.util.StringUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 
 import javax.servlet.ServletRequest;
@@ -23,13 +22,15 @@ public class CustomRolesAuthorizationFilter extends AuthorizationFilter {
 
 
         UserVO userVO = (UserVO)SecurityUtils.getSubject().getPrincipal();
-        String requestPath = getRequestPath(request);
-        if(StringUtil.isEmpty(userVO)){
-            throw new NoLoginException();
+        if(StringUtil.isEmpty(userVO)||!userVO.hasRoleOf(Role.SUPER_ADMIN)){
+            String requestPath = getRequestPath(request);
+            if(StringUtil.isEmpty(userVO)){
+                throw new NoLoginException();
+            }
+            Boolean hasPerm =  userVO.hasPermissionForParh(requestPath);
+            return hasPerm;
         }
-        Boolean hasPerm =  userVO.hasPermissionForParh(requestPath);
-        return hasPerm;
-
+        return true;
 
     }
 
