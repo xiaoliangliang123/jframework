@@ -7,8 +7,8 @@ import org.quartz.TriggerListener;
 
 public class ScheduleOnceListener implements TriggerListener {
 
-    private Integer count = 0 ;
-    private Integer current = 0;
+    private Integer count = 1 ;
+    private Integer current = 1;
 
     public ScheduleOnceListener(Integer count){
         this.count =count;

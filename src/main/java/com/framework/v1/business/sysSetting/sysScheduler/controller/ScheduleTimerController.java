@@ -44,5 +44,34 @@ public class ScheduleTimerController {
         return jsonResult;
     }
 
+    @RequestMapping(name = "立即执行任务" ,value = "/startOrShutdownOnce",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult startOrShutdownJobOnce(String jobId,Integer count) throws Exception {
+
+
+        JsonResult jsonResult = scheduleTimerService.startOrShutdownJobOnce(jobId,count);
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "获取定时任务信息" ,value = "/getScheduleJob",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult getScheduleJob(String jobId) throws Exception {
+
+
+        JsonResult jsonResult = scheduleTimerService.getScheduleJobByJobId(jobId);
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "删除任务" ,value = "/del",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult del(String jobId) throws Exception {
+
+
+
+        //删除权限集合
+        JsonResult jsonResult = scheduleTimerService.removeScheduleTimerById(jobId);
+        return jsonResult;
+    }
+
 
 }

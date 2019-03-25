@@ -130,11 +130,10 @@ public class SchedulerUtil {
             //使用cornTrigger规则  每天18点30分
             Trigger trigger=TriggerBuilder.newTrigger().withIdentity(triggerName, triggerGroupName)
                     .withSchedule(CronScheduleBuilder.cronSchedule(cron))
-                    .startNow()
                     .build();
             // 把作业和触发器注册到任务调度中
             scheduler.scheduleJob(job, trigger);
-            scheduler.getListenerManager().addTriggerListener(new ScheduleOnceListener(5));
+            scheduler.getListenerManager().addTriggerListener(new ScheduleOnceListener(count));
             // 启动调度
             scheduler.start();
 

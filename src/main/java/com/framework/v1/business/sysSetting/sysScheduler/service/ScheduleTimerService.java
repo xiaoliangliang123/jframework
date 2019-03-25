@@ -10,4 +10,10 @@ public interface ScheduleTimerService extends BaseQuery {
     JsonResult addOrEdit(Sys_Schedule_Timer_JobModel sysScheduleTimerJobModel) throws Exception;
 
     JsonResult startOrShutdownJob(String jobId) throws Exception;
+
+    JsonResult startOrShutdownJobOnce(String jobId,Integer count) throws Exception;
+
+    JsonResult removeScheduleTimerById(String jobId) throws Exception;
+
+    JsonResult getScheduleJobByJobId(String jobId) throws Exception;
 }
