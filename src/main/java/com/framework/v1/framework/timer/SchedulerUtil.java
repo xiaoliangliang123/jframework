@@ -18,6 +18,8 @@ import java.util.List;
 public class SchedulerUtil {
 
 
+    public static final String SCHEDULE_NAME = "schedule_name";
+
     private SchedulerFactory schedulerfactory =new StdSchedulerFactory();
     private static Logger _logger = Logger.getLogger(SchedulerUtil.class);// log4j记录日志
     private static SchedulerUtil schedulerUtil = new SchedulerUtil();
@@ -116,27 +118,9 @@ public class SchedulerUtil {
     public  void hadleInvokeTrigger(String jobName, String jobGroupName,
                                   String triggerName, String triggerGroupName, Class jobClass,String cron,Integer count) {
 
-        Scheduler scheduler = null;
         try {
-            // 通过schedulerFactory获取一个调度器
-            scheduler = schedulerfactory.getScheduler();
-
-            // 创建jobDetail实例，绑定Job实现类
-            // 指明job的名称，所在组的名称，以及绑定job类
-            JobDetail job = JobBuilder.newJob(jobClass)
-                    .withIdentity(jobName, jobGroupName).build();
-            // 定义调度触发规则
-            job.getJobDataMap().put(job.getKey().getName()+"count",count);
-            //使用cornTrigger规则  每天18点30分
-            Trigger trigger=TriggerBuilder.newTrigger().withIdentity(triggerName, triggerGroupName)
-                    .withSchedule(CronScheduleBuilder.cronSchedule(cron))
-                    .build();
-            // 把作业和触发器注册到任务调度中
-            scheduler.scheduleJob(job, trigger);
-            scheduler.getListenerManager().addTriggerListener(new ScheduleOnceListener(count));
-            // 启动调度
-            scheduler.start();
-
+            String random = GenerateUtil.uuid();
+            handleSimpleTrigger(jobName+"_"+random,jobGroupName+"_"+random,triggerName+"_"+random,triggerGroupName+"_"+random,jobClass,1,count);
         } catch (Exception e) {
             _logger.warn("执行"+jobName+"组"+jobName+"任务出现异常E:["+ e.getMessage() + "]");
         }
@@ -159,6 +143,7 @@ public class SchedulerUtil {
 
         Scheduler scheduler = null;
         try {
+
             // 通过schedulerFactory获取一个调度器
             scheduler = schedulerfactory.getScheduler();
 
