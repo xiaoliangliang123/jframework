@@ -35,7 +35,7 @@ public class SchedulerUtil {
      * @param jobName 任务名字
      * @param jobGroupName 任务组名字
      */
-    public  void handleSimpleTrigger(String jobName, String jobGroupName,
+    public  void handleSimpleTrigger(String jobId,String jobName, String jobGroupName,
                                            String triggerName, String triggerGroupName, Class jobClass,
                                            int time, int count) {
 
@@ -48,6 +48,7 @@ public class SchedulerUtil {
             // 指明job的名称，所在组的名称，以及绑定job类
             JobDetail job = JobBuilder.newJob(jobClass)
                     .withIdentity(jobName, jobGroupName).build();
+            job.getJobDataMap().put("jobId",jobId);
             // 定义调度触发规则
             //使用simpleTrigger规则
             Trigger
@@ -75,7 +76,7 @@ public class SchedulerUtil {
      * @param jobClass 任务类
      * @param cron 触发规则<br>
      */
-    public  void hadleCronTrigger(String jobName, String jobGroupName,
+    public  void hadleCronTrigger(String jobId,String jobName, String jobGroupName,
                                         String triggerName, String triggerGroupName, Class jobClass,String cron) {
 
         Scheduler scheduler = null;
@@ -88,7 +89,7 @@ public class SchedulerUtil {
             JobDetail job = JobBuilder.newJob(jobClass)
                     .withIdentity(jobName, jobGroupName).build();
             // 定义调度触发规则
-
+            job.getJobDataMap().put("jobId",jobId);
             //使用cornTrigger规则  每天18点30分
             Trigger trigger=TriggerBuilder.newTrigger().withIdentity(triggerName, triggerGroupName)
                     .withSchedule(CronScheduleBuilder.cronSchedule(cron))
@@ -115,12 +116,13 @@ public class SchedulerUtil {
      * @param jobClass 任务类
      * @param cron 触发规则<br>
      */
-    public  void hadleInvokeTrigger(String jobName, String jobGroupName,
+    public  void hadleInvokeTrigger(String jobId, String jobName, String jobGroupName,
                                   String triggerName, String triggerGroupName, Class jobClass,String cron,Integer count) {
 
         try {
+
             String random = GenerateUtil.uuid();
-            handleSimpleTrigger(jobName+"_"+random,jobGroupName+"_"+random,triggerName+"_"+random,triggerGroupName+"_"+random,jobClass,1,count);
+            handleSimpleTrigger(jobId,jobName+"_"+random,jobGroupName+"_"+random,triggerName+"_"+random,triggerGroupName+"_"+random,jobClass,1,count);
         } catch (Exception e) {
             _logger.warn("执行"+jobName+"组"+jobName+"任务出现异常E:["+ e.getMessage() + "]");
         }
@@ -138,7 +140,7 @@ public class SchedulerUtil {
      * @param jobClass 任务类
      * @param crons 触发规则数组<br>
      */
-    public  void hadleCronTriggers(String jobName, String jobGroupName,
+    public  void hadleCronTriggers(String jobId,String jobName, String jobGroupName,
                                         String[] triggerNames, String[] triggerGroupNames, Class jobClass,String[] crons) {
 
         Scheduler scheduler = null;
@@ -151,7 +153,7 @@ public class SchedulerUtil {
             // 指明job的名称，所在组的名称，以及绑定job类
             JobDetail job = JobBuilder.newJob(jobClass)
                     .withIdentity(jobName, jobGroupName).storeDurably().build();
-
+            job.getJobDataMap().put("jobId",jobId);
             scheduler.addJob(job, true);
             for(int i = 0 ; i < triggerNames.length;i++) {
                 // 定义调度触发规则
@@ -171,14 +173,16 @@ public class SchedulerUtil {
         }
     }
 
-    public  void removeJob(String jobName, String jobGroupName,
+    public  void removeJob(String jobId,String jobName, String jobGroupName,
                                  String triggerName, String triggerGroupName) {
         try {
+
             Scheduler sched = schedulerfactory.getScheduler();
+            JobKey jobKey = new JobKey(jobName, jobGroupName);
             TriggerKey triggerKey =  new TriggerKey(triggerName,triggerGroupName);
             sched.pauseTrigger(triggerKey);// 停止触发器
             sched.unscheduleJob(triggerKey);// 移除触发器
-            sched.deleteJob(new JobKey(jobName, jobGroupName));// 删除任务
+            sched.deleteJob(jobKey);// 删除任务
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

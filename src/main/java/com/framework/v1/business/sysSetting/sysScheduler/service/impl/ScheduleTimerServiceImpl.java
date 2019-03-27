@@ -76,10 +76,10 @@ public class ScheduleTimerServiceImpl   extends BaseServiceAdapter implements Sc
         Class jobClass =  scheduleTimerJobModel.jobClassUrlToClass();
         Trigger.TriggerState triggerState = SchedulerUtil.getScheduler().getJobTriggerState(new JobKey(scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name()));
         if(!scheduleTimerJobModel.isRunning(triggerState)){
-            SchedulerUtil.getScheduler().hadleCronTrigger(scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name(),jobClass,scheduleTimerJobModel.getCron());
+            SchedulerUtil.getScheduler().hadleCronTrigger(jobId,scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name(),jobClass,scheduleTimerJobModel.getCron());
             return new JsonResult(true,"任务启动成功", JobState.initState(JobState.STATE_RUNNING));
         }else {
-            SchedulerUtil.getScheduler().removeJob(scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name());
+            SchedulerUtil.getScheduler().removeJob(jobId,scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name());
             return new JsonResult(true,"任务停止成功",JobState.initState(JobState.STATE_SHUTDOWN));
         }
     }
@@ -92,7 +92,7 @@ public class ScheduleTimerServiceImpl   extends BaseServiceAdapter implements Sc
         scheduleTimerJobModel = (Sys_Schedule_Timer_JobModel)getjBaseDao().selectModel(scheduleTimerJobModel);
         Class jobClass =  scheduleTimerJobModel.jobClassUrlToClass();
         Trigger.TriggerState triggerState = SchedulerUtil.getScheduler().getJobTriggerState(new JobKey(scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name()));
-        SchedulerUtil.getScheduler().hadleInvokeTrigger(scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name(),jobClass,scheduleTimerJobModel.getCron(),count);
+        SchedulerUtil.getScheduler().hadleInvokeTrigger(jobId,scheduleTimerJobModel.getJob_name(),scheduleTimerJobModel.getJob_group_name(),scheduleTimerJobModel.getTrigger_name(),scheduleTimerJobModel.getTrigger_group_name(),jobClass,scheduleTimerJobModel.getCron(),count);
         return new JsonResult(true,"任务启动成功", JobState.initState(JobState.STATE_RUNNING));
 
     }
