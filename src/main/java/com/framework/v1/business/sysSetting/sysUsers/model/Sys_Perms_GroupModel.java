@@ -7,6 +7,24 @@ public class Sys_Perms_GroupModel extends BaseModel {
     private String uid;
     private String id ;
     private String name ;
+    private String isTop;
+    private String parentId;
+
+    public String getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(String isTop) {
+        this.isTop = isTop;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
 
     public String getUid() {
         return uid;

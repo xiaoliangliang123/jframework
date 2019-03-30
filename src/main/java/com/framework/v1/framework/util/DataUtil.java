@@ -22,12 +22,12 @@ public class DataUtil {
         return urls;
     }
 
-    public static <T> List<T> copyListMap2ListBean(List<Map> allPermsGroupModels, Class<T> objclass) throws Exception{
-        if(StringUtil.isEmpty(allPermsGroupModels)){
+    public static <T> List<T> copyListMap2ListBean(List<Map> mapList, Class<T> objclass) throws Exception{
+        if(StringUtil.isEmpty(mapList)){
             return null;
         }
         List<T> tlist = new ArrayList<>();
-        for(Map m:allPermsGroupModels){
+        for(Map m:mapList){
             T bean = copyMap2Bean(m,objclass);
             tlist.add(bean);
         }

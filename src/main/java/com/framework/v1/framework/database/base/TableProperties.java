@@ -307,7 +307,6 @@ public class TableProperties {
     private static List<String> getPkValues(TableProperties tableProperties, BaseModel baseModel) throws IllegalAccessException {
         List<String> pkValues = new ArrayList<>();
         Class baseModelClass = baseModel.getClass();
-        System.out.println(baseModelClass.getName());
         Field[] fields = baseModelClass.getDeclaredFields();
 
         // 循环遍历字段，获取字段相应的属性值
@@ -317,6 +316,7 @@ public class TableProperties {
             String name = field.getName();
             if (tableProperties.getPkeys().contains(name)) {
                 String pkvalue = (String) field.get(baseModel);
+
                 pkValues.add(pkvalue);
             }
         }

@@ -23,14 +23,14 @@ public abstract class AbstractScheduleJob implements Job{
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-
+        JobDetail jobDetail = jobExecutionContext.getJobDetail();
+        String jobId = (String) jobDetail.getJobDataMap().getString(JOB_ID);
+        String now = GenerateUtil.currentTime();
         try{
-                JobDetail jobDetail = jobExecutionContext.getJobDetail();
                 JBaseDao jBaseDao =  SpringUtil.getObject(JBaseDao.class);
                 Sys_Schedule_Job_TimeModel sysScheduleJobTimeModel  = new Sys_Schedule_Job_TimeModel();
                 sysScheduleJobTimeModel.setId(GenerateUtil.uuid());
-                sysScheduleJobTimeModel.setTime(GenerateUtil.currentTime());
-                String jobId = (String) jobDetail.getJobDataMap().getString(JOB_ID);
+                sysScheduleJobTimeModel.setTime(now);
                 sysScheduleJobTimeModel.setJob_id(jobId);
                 sysScheduleJobTimeModel.setExecute_type(TYPE_NORMAL);
                 sysScheduleJobTimeModel.setResult(STATE_SUCCESS);
@@ -41,15 +41,14 @@ public abstract class AbstractScheduleJob implements Job{
                 Long useTime = end -start ;
                 sysScheduleJobTimeModel.setUse_time(useTime.toString());
                 jBaseDao.insertModel(sysScheduleJobTimeModel);
-
+                logger.info("job :"+jobDetail.getKey().getName()+" id :"+jobId+"  执行成功,用时:"+useTime +"ms ,开始时间:"+now +" job class:"+jobDetail.getJobClass().getName());
         }catch (Exception e){
             try {
-                JobDetail jobDetail = jobExecutionContext.getJobDetail();
+                logger.info("job :"+jobDetail.getKey().getName()+" id :"+jobId+", 执行成功,开始时间:"+now +" job class:"+jobDetail.getJobClass().getName());
                 JBaseDao jBaseDao =  SpringUtil.getObject(JBaseDao.class);
                 Sys_Schedule_Job_TimeModel sysScheduleJobTimeModel  = new Sys_Schedule_Job_TimeModel();
                 sysScheduleJobTimeModel.setId(GenerateUtil.uuid());
-                sysScheduleJobTimeModel.setTime(GenerateUtil.currentTime());
-                String jobId = (String) jobDetail.getJobDataMap().getString(JOB_ID);
+                sysScheduleJobTimeModel.setTime(now);
                 sysScheduleJobTimeModel.setJob_id(jobId);
                 sysScheduleJobTimeModel.setExecute_type(TYPE_NORMAL);
                 sysScheduleJobTimeModel.setResult(STATE_FAILED);
