@@ -9,13 +9,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-/**
- * 
- * 该类是ajax请求结果封装类
- * 
- * @version 2015年8月25日
- * @author leibf
- */
+
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class JsonResult extends HashMap<String, Object>
 {
