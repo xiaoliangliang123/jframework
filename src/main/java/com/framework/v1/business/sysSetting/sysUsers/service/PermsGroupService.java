@@ -14,4 +14,6 @@ public interface PermsGroupService extends BaseQuery {
     Sys_Perms_GroupModel getSysPermsModel(String permsGroupId) throws Exception;
 
     JsonResult queryTopModuleList() throws Exception;
+
+    JsonResult queryTopGroupListByParentId(String parentId);
 }

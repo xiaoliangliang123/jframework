@@ -23,7 +23,7 @@ public class PermsGroupServiceImpl  extends BaseServiceAdapter implements PermsG
 
     @Override
     public QueryParams baseQuery() {
-        return new QueryParams("select * from sys_perms_group where isTop = 0","");
+        return new QueryParams("select top_group.name as tname,sys_perms_group.id,sys_perms_group.name,sys_perms_group.uid  from sys_perms_group ,(select name,uid from sys_perms_group where isTop =1 )top_group  where isTop = 0 and sys_perms_group.parentId =top_group.uid ","");
     }
 
     @Override
@@ -64,7 +64,6 @@ public class PermsGroupServiceImpl  extends BaseServiceAdapter implements PermsG
         sys_perms_groupModel.setUid(uid);
         sys_perms_groupModel = (Sys_Perms_GroupModel)getjBaseDao().selectModel(sys_perms_groupModel);
         return   new JsonResult(true,"获取权限集成功", sys_perms_groupModel) ;
-
     }
 
     @Override
@@ -82,5 +81,16 @@ public class PermsGroupServiceImpl  extends BaseServiceAdapter implements PermsG
         List<Map> mapList =  getjBaseDao().queryForList(sql);
         List<Sys_Perms_GroupModel> allTopModels =DataUtil.copyListMap2ListBean(mapList,Sys_Perms_GroupModel.class);
         return new JsonResult(allTopModels);
+    }
+
+    @Override
+    public JsonResult queryTopGroupListByParentId(String parentId) {
+
+        String  sql = "select top_group.name as tname,sys_perms_group.id,sys_perms_group.name,sys_perms_group.uid  from sys_perms_group ,(select name,uid from sys_perms_group where isTop =1 )top_group  where isTop = 0 and sys_perms_group.parentId =top_group.uid and sys_perms_group.parentId ='"+parentId+"' ";
+        if(StringUtil.isEmpty(parentId)){
+              sql = "select top_group.name as tname,sys_perms_group.id,sys_perms_group.name,sys_perms_group.uid  from sys_perms_group ,(select name,uid from sys_perms_group where isTop =1 )top_group  where isTop = 0 and sys_perms_group.parentId =top_group.uid ";
+        }
+        List<Map> groupList = getjBaseDao().queryForList(sql);
+        return new JsonResult(groupList);
     }
 }

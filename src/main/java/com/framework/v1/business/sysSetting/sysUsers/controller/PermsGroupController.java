@@ -28,13 +28,23 @@ public class PermsGroupController {
         return jsonResult;
     }
 
-    @RequestMapping(name = "一级权限列表" ,value = "/topList",method = RequestMethod.POST)
+    @RequestMapping(name = "一级权模块列表" ,value = "/topList",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult topModulelist() throws Exception {
 
 
-        //权限集列表
+        //一级权模块列表
         JsonResult jsonResult = permsGroupService.queryTopModuleList();
+        return jsonResult;
+    }
+
+    @RequestMapping(name = "二级模块列表" ,value = "/groupsList",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult topModulelist(String parentId) throws Exception {
+
+
+        //二技权限集列表
+        JsonResult jsonResult = permsGroupService.queryTopGroupListByParentId(parentId);
         return jsonResult;
     }
 
