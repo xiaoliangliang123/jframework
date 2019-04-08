@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/framework/v1/business/base/service/AlipayCommunication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/framework/v1/business/base/service/BaseQuery.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/sql/master.sql" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
