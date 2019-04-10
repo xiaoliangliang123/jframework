@@ -26,6 +26,7 @@ public class ShiroConfiguration {
     }
 
 
+    @Bean
     public AuthorizationFilter createAuthorizationFilter(){
         return new CustomRolesAuthorizationFilter();
     }
@@ -66,7 +67,7 @@ public class ShiroConfiguration {
 
         shiroFilterFactoryBean.setSuccessUrl("/common/loginSuccess");
         Map<String,Filter> filterMap = new HashMap<String, Filter>();
-        filterMap.put("roles",createAuthorizationFilter());
+        filterMap.put("roles",this.createAuthorizationFilter());
 
         shiroFilterFactoryBean.setFilters(filterMap);
         //错误页面，认证不通过跳转

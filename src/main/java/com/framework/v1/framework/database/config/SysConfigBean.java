@@ -36,11 +36,25 @@ public class SysConfigBean {
 
     private String allowRequestAddress;
 
+    private Boolean isAuth;
+
+    public Boolean getIsAuth() {
+        return isAuth;
+    }
+
+    public void setIsAuth(Boolean isAuth) {
+        this.isAuth = isAuth;
+    }
+
     public String getAllowRequestAddress() {
         return allowRequestAddress;
     }
 
     public void setAllowRequestAddress(String allowRequestAddress) {
         this.allowRequestAddress = allowRequestAddress;
+    }
+
+    public boolean isAuth() {
+        return  this.getIsAuth();
     }
 }
