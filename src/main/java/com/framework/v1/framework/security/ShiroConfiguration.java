@@ -6,9 +6,12 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +19,10 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfiguration {
+
+
+
+
     //将自己的验证方式加入容器
     @Bean(value = "costomRealm")
     public CostomRealm myShiroRealm() {
@@ -26,7 +33,6 @@ public class ShiroConfiguration {
     }
 
 
-    @Bean
     public AuthorizationFilter createAuthorizationFilter(){
         return new CustomRolesAuthorizationFilter();
     }
@@ -67,7 +73,7 @@ public class ShiroConfiguration {
 
         shiroFilterFactoryBean.setSuccessUrl("/common/loginSuccess");
         Map<String,Filter> filterMap = new HashMap<String, Filter>();
-        filterMap.put("roles",this.createAuthorizationFilter());
+        filterMap.put("roles",createAuthorizationFilter());
 
         shiroFilterFactoryBean.setFilters(filterMap);
         //错误页面，认证不通过跳转
@@ -90,6 +96,7 @@ public class ShiroConfiguration {
         creator.setProxyTargetClass(true);
         return creator;
     }
+
 
 
 }

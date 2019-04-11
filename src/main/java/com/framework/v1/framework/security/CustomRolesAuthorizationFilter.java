@@ -14,21 +14,28 @@ import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
 
 public class CustomRolesAuthorizationFilter extends AuthorizationFilter {
 
 
-    @Resource
-    private SysConfigBean sysConfigBean;
+    //@Resource
+    //private SysConfigBean sysConfigBean;
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
             throws Exception {
 
 
+
+        /*
         if(!sysConfigBean.isAuth()){
             return true;
         }
+        */
+
+
+        SysConfigBean sysConfigBean =  (SysConfigBean)SpringUtil.getBean("sysConfigBean");
         UserVO userVO = (UserVO)SecurityUtils.getSubject().getPrincipal();
         if(StringUtil.isEmpty(userVO)||!userVO.hasRoleOf(Role.SUPER_ADMIN)){
             String requestPath = getRequestPath(request);

@@ -47,7 +47,7 @@ public abstract class BaseService extends BaseDao {
     protected  String wapperSqlInWhere(Map qps,String sql){
 
         StringBuffer whereSql = null;
-        if(sql.contains("where")){
+        if(sql.contains(" where")){
              whereSql = new StringBuffer(" ");
         }else {
             whereSql = new StringBuffer(" where 1=1 ");
