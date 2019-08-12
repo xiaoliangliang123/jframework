@@ -17,7 +17,7 @@ public class PermsGroupViewServiceImpl  extends BaseServiceAdapter implements Pe
 
     @Override
     public QueryParams baseQuery() {
-        return new QueryParams("  select sys_perms_group_view.*,sys_perms_group.name gname,tview.name tname from sys_perms_group_view , sys_perms_group ,(select *from sys_perms_group where sys_perms_group.istop = 1)tview where sys_perms_group_view.groupId = sys_perms_group.uid and tview.uid = sys_perms_group.parentId "," order by seq asc");
+        return new QueryParams("  select sys_perms_group.uid ,sys_perms_group_view.*,sys_perms_group.name gname,tview.name tname from sys_perms_group_view , sys_perms_group ,(select *from sys_perms_group where sys_perms_group.istop = 1)tview where sys_perms_group_view.groupId = sys_perms_group.uid and tview.uid = sys_perms_group.parentId "," order by seq asc");
     }
 
     @Override
@@ -29,7 +29,6 @@ public class PermsGroupViewServiceImpl  extends BaseServiceAdapter implements Pe
             getjBaseDao().insertModel(sysPermsGroupViewModel);
         }else {
             getjBaseDao().updateModel(sysPermsGroupViewModel);
-
         }
         return new JsonResult("保存成功");
     }

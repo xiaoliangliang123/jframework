@@ -35,7 +35,6 @@ public class CustomRolesAuthorizationFilter extends AuthorizationFilter {
         */
 
 
-        SysConfigBean sysConfigBean =  (SysConfigBean)SpringUtil.getBean("sysConfigBean");
         UserVO userVO = (UserVO)SecurityUtils.getSubject().getPrincipal();
         if(StringUtil.isEmpty(userVO)||!userVO.hasRoleOf(Role.SUPER_ADMIN)){
             String requestPath = getRequestPath(request);

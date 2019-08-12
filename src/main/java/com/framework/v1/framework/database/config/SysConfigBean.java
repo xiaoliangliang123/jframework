@@ -57,4 +57,6 @@ public class SysConfigBean {
     public boolean isAuth() {
         return  this.getIsAuth();
     }
+
+
 }
