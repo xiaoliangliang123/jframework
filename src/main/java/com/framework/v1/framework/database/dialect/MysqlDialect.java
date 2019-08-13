@@ -27,16 +27,6 @@ public class MysqlDialect extends DBDialect{
     }
 
 
-    public int getNoSqlStart() {
-
-        return (pageInfo.getCurrentPage()-1)*pageInfo.getPageSize()<=0 ?0:(pageInfo.getCurrentPage()-1)*pageInfo.getPageSize();
-    }
-
-    @Override
-    public int getNoSqlEnd(int totalCount) {
-        Integer count =  pageInfo.getCurrentPage()*pageInfo.getPageSize();
-        return count>=totalCount?totalCount:count;
-    }
 
 
 }

@@ -23,6 +23,13 @@ public class PageInfo {
     private Integer currentPage = 0;
     private DBDialect dbDialect;
 
+    public DBDialect getDbDialect() {
+        return dbDialect;
+    }
+
+    public void setDbDialect(DBDialect dbDialect) {
+        this.dbDialect = dbDialect;
+    }
 
     public PageInfo() {
     }
@@ -48,6 +55,7 @@ public class PageInfo {
 
     public static PageInfo init(Map map) {
 
+        DBDialectUtil dBDialectUtil =  SpringUtil.getObject(DBDialectUtil.class);
         if (map.containsKey(PAGE_INFO_KEY)) {
             String pinfo[] = (String[]) map.get(PAGE_INFO_KEY);
             if (pinfo != null && pinfo.length > 0) {
@@ -55,10 +63,9 @@ public class PageInfo {
                 Map m = jsonObject;
                 Integer pageSize = Integer.parseInt(m.get(PAGE_SIZE_KEY).toString());
                 Integer currentPage = Integer.parseInt(m.get(CURRENT_PAGE_KEY).toString());
-
-                return new PageInfo(0, pageSize, currentPage);
+                PageInfo pageInfo = new PageInfo(0, pageSize, currentPage);
+                return pageInfo;
             }
-
         }
         return new PageInfo();
     }
@@ -83,10 +90,12 @@ public class PageInfo {
 
 
     public int getNoSqlStart() {
-        return dbDialect.getNoSqlStart();
+        return (getCurrentPage()-1)*getPageSize()<=0 ?0:(getCurrentPage()-1)*getPageSize();
+
     }
 
-    public int getNoSqlEnd(int size) {
-        return dbDialect.getNoSqlEnd(size);
-    }
+    public int getNoSqlEnd(int totalCount) {
+
+        Integer count =  getCurrentPage()*getPageSize();
+        return count>=totalCount?totalCount:count;    }
 }

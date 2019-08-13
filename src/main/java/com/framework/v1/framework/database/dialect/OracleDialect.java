@@ -16,14 +16,4 @@ public class OracleDialect extends DBDialect {
         return null;
     }
 
-    @Override
-    public int getNoSqlStart() {
-        return 0;
-    }
-
-    @Override
-    public int getNoSqlEnd(int size) {
-        return 0;
-    }
-
 }

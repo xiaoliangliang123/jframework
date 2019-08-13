@@ -46,7 +46,4 @@ public abstract class DBDialect {
 
     public abstract String pageSql();
 
-    public abstract int getNoSqlStart();
-
-    public abstract int getNoSqlEnd(int size);
 }
